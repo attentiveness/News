@@ -1,6 +1,6 @@
 # News
 A News App Write In Android
 
-Use ReativeX, Material Design
+Use ReactiveX, Material Design
 
 Studying And Programming
