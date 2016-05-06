@@ -53,4 +53,5 @@ dependencies {
     androidTestCompile presentationTestDependencies.espresso
     androidTestCompile presentationTestDependencies.testingSupportLib
     androidTestCompile presentationTestDependencies.androidAnnotations
+    compile 'com.android.support:support-v4:23.3.0'
 }
