@@ -16,10 +16,7 @@ import butterknife.ButterKnife;
 public class EducationNewsListFragment extends BaseFragment {
 
     public static EducationNewsListFragment newInstance() {
-        EducationNewsListFragment fragment = new EducationNewsListFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+        return new EducationNewsListFragment();
     }
 
     public EducationNewsListFragment() {

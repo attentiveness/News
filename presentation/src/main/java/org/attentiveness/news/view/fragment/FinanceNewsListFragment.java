@@ -16,10 +16,7 @@ import butterknife.ButterKnife;
 public class FinanceNewsListFragment extends BaseFragment {
 
     public static FinanceNewsListFragment newInstance() {
-        FinanceNewsListFragment fragment = new FinanceNewsListFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+        return new FinanceNewsListFragment();
     }
 
     public FinanceNewsListFragment() {

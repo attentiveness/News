@@ -16,10 +16,7 @@ import butterknife.ButterKnife;
 public class TechNewsListFragment extends BaseFragment {
 
     public static TechNewsListFragment newInstance() {
-        TechNewsListFragment fragment = new TechNewsListFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+        return new TechNewsListFragment();
     }
 
     public TechNewsListFragment() {
