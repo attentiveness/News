@@ -15,6 +15,8 @@ import butterknife.ButterKnife;
  */
 public class InternetNewsListFragment extends BaseFragment {
 
+
+
     public static InternetNewsListFragment newInstance() {
         InternetNewsListFragment fragment = new InternetNewsListFragment();
         Bundle args = new Bundle();
