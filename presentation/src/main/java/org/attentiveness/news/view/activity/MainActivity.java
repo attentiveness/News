@@ -3,6 +3,11 @@ package org.attentiveness.news.view.activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,9 +18,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import org.attentiveness.news.R;
+import org.attentiveness.news.view.fragment.EducationNewsListFragment;
+import org.attentiveness.news.view.fragment.InternetNewsListFragment;
+import org.attentiveness.news.view.fragment.FinanceNewsListFragment;
+import org.attentiveness.news.view.fragment.TechNewsListFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -27,6 +37,12 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     DrawerLayout drawer;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
+    @BindView(R.id.tl_channels)
+    TabLayout mTlChannels;
+    @BindView(R.id.vp_news_list)
+    ViewPager mVpNewsList;
+
+    private static String[] mTabTexts = new String[4];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +50,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        init();
+    }
 
+    private void init() {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,6 +68,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        mTabTexts = getResources().getStringArray(R.array.tab_text_array);
+        mVpNewsList.setAdapter(new NewsListAdapter(getSupportFragmentManager()));
+        mTlChannels.setupWithViewPager(mVpNewsList);
     }
 
     @Override
@@ -96,5 +119,46 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private static class NewsListAdapter extends FragmentStatePagerAdapter {
+
+        private Fragment fragment;
+
+        public NewsListAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0:
+                    fragment = InternetNewsListFragment.newInstance();
+                    break;
+                case 1:
+                    fragment = TechNewsListFragment.newInstance();
+                    break;
+                case 2:
+                    fragment = FinanceNewsListFragment.newInstance();
+                    break;
+                case 3:
+                    fragment = EducationNewsListFragment.newInstance();
+                    break;
+                default:
+                    fragment = InternetNewsListFragment.newInstance();
+                    break;
+            }
+            return fragment;
+        }
+
+        @Override
+        public int getCount() {
+            return 4;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mTabTexts[position];
+        }
     }
 }
