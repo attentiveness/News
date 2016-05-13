@@ -11,15 +11,16 @@ import android.view.ViewGroup;
 
 import org.attentiveness.news.R;
 import org.attentiveness.news.data.entity.ChannelEntity;
-import org.attentiveness.news.data.net.NewsService;
+import org.attentiveness.news.data.net.RestApi;
+import org.attentiveness.news.data.net.RestApiImpl;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Internet News List
@@ -55,24 +56,34 @@ public class InternetNewsListFragment extends BaseFragment {
     }
 
     private void getChannelList() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(NewsService.API_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        NewsService newsService = retrofit.create(NewsService.class);
-        Call<ChannelEntity> call = newsService.getChannelList();
-        call.enqueue(new Callback<ChannelEntity>() {
+        Subscriber<List<ChannelEntity>> subscriber = new Subscriber<List<ChannelEntity>>() {
             @Override
-            public void onResponse(Call<ChannelEntity> call, Response<ChannelEntity> response) {
-                Log.e("NetFragment", "response successful: " + response.isSuccessful());
-                Log.e("NetFragment", response.body().toString());
+            public void onCompleted() {
+
             }
 
             @Override
-            public void onFailure(Call<ChannelEntity> call, Throwable t) {
-                Log.e("NetFragment", t.getMessage());
+            public void onError(Throwable e) {
+                Log.e("NetFragment", e.getMessage());
             }
-        });
+
+            @Override
+            public void onNext(List<ChannelEntity> channelEntityList) {
+                if (channelEntityList == null) {
+                    Log.e("NetFragment", "The list is null.");
+                } else {
+                    for (ChannelEntity channelEntity : channelEntityList) {
+                        Log.e("NetFragment", channelEntity.toString());
+                    }
+                }
+            }
+        };
+        RestApi restApi = RestApiImpl.getInstance();
+        restApi.getChannelList()
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(subscriber);
     }
 
 }

@@ -7,10 +7,10 @@ import com.google.gson.annotations.SerializedName;
  */
 public class ChannelEntity {
 
-//    @SerializedName("channelId")
+    @SerializedName("channelId")
     private String id;
 
-//    @SerializedName("name")
+    @SerializedName("name")
     private String name;
 
     public ChannelEntity(String id) {
@@ -34,8 +34,8 @@ public class ChannelEntity {
         StringBuilder stringBuilder;
         stringBuilder = new StringBuilder();
         stringBuilder.append("********** Channel Entity **********").append("\n");
-        stringBuilder.append("id = ").append(this.getId()).append("\n");
-        stringBuilder.append("name = ").append(this.getName()).append("\n");
+        stringBuilder.append("channel id = ").append(this.getId()).append("\n");
+        stringBuilder.append("channel name = ").append(this.getName()).append("\n");
         stringBuilder.append("********** Channel Entity **********").append("\n");
         return stringBuilder.toString();
     }
