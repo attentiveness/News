@@ -24,6 +24,7 @@ ext {
     gsonVersion = '2.6.2'
     retrofitVersion = '2.0.2'
     okHttpVersion = '2.7.5'
+    picassoVersion = '2.5.2'
 
     //Testing
     robolectricVersion = '3.0'
@@ -47,7 +48,8 @@ ext {
             rxAndroid          : "io.reactivex:rxandroid:${rxAndroidVersion}",
             logger             : "com.github.orhanobut:logger:${loggerVersion}",
             javaxAnnotation    : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-            rxPreferences      : "com.f2prateek.rx.preferences:rx-preferences:${rxPreferencesVersion}"
+            rxPreferences      : "com.f2prateek.rx.preferences:rx-preferences:${rxPreferencesVersion}",
+            picasso            : "com.squareup.picasso:picasso:${picassoVersion}"
     ]
 
     presentationTestDependencies = [

@@ -1,6 +1,7 @@
 package org.attentiveness.news.internal.di.modules;
 
 import org.attentiveness.news.domain.interactor.GetChannelList;
+import org.attentiveness.news.domain.interactor.GetNewsList;
 import org.attentiveness.news.domain.interactor.UseCase;
 import org.attentiveness.news.internal.di.PerActivity;
 
@@ -26,4 +27,11 @@ public class NewsModule {
         return getChannelListUseCase;
     }
 
+
+    @Provides
+    @PerActivity
+    @Named("newsList")
+    UseCase provideGetNewsListUseCase(GetNewsList getNewsListUseCase) {
+        return getNewsListUseCase;
+    }
 }

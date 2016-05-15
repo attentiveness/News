@@ -1,6 +1,7 @@
 package org.attentiveness.news.data.repository.datasource;
 
 import org.attentiveness.news.data.entity.ChannelEntity;
+import org.attentiveness.news.data.entity.NewsEntity;
 import org.attentiveness.news.data.net.RestApi;
 
 import java.util.List;
@@ -19,7 +20,12 @@ public class CloudNewsDataStore implements NewsDataStore {
     }
 
     @Override
-    public Observable<List<ChannelEntity>> getNewsEntityList() {
-        return mRestApi.getChannelList();
+    public Observable<List<ChannelEntity>> getChannelEntityList() {
+        return mRestApi.getChannelEntityList();
+    }
+
+    @Override
+    public Observable<List<NewsEntity>> getNewsEntityList() {
+        return mRestApi.getNewsEntityList();
     }
 }

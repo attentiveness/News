@@ -1,10 +1,12 @@
 package org.attentiveness.news.data.repository;
 
 import org.attentiveness.news.data.entity.ChannelEntity;
+import org.attentiveness.news.data.entity.NewsEntity;
 import org.attentiveness.news.data.entity.mapper.NewsEntityDataMapper;
 import org.attentiveness.news.data.repository.datasource.NewsDataStore;
 import org.attentiveness.news.data.repository.datasource.NewsDataStoreFactory;
 import org.attentiveness.news.domain.bean.Channel;
+import org.attentiveness.news.domain.bean.News;
 import org.attentiveness.news.domain.repository.NewsRepository;
 
 import java.util.List;
@@ -33,10 +35,21 @@ public class NewsDataRepository implements NewsRepository {
     @Override
     public Observable<List<Channel>> getChannelList() {
         NewsDataStore newsDataStore = mNewsDataStoreFactory.createCloudDataStore();
-        return newsDataStore.getNewsEntityList().map(new Func1<List<ChannelEntity>, List<Channel>>() {
+        return newsDataStore.getChannelEntityList().map(new Func1<List<ChannelEntity>, List<Channel>>() {
             @Override
             public List<Channel> call(List<ChannelEntity> channelEntityList) {
                 return mNewsEntityDataMapper.transform(channelEntityList);
+            }
+        });
+    }
+
+    @Override
+    public Observable<List<News>> getNewsList() {
+        NewsDataStore newsDataStore = mNewsDataStoreFactory.createCloudDataStore();
+        return newsDataStore.getNewsEntityList().map(new Func1<List<NewsEntity>, List<News>>() {
+            @Override
+            public List<News> call(List<NewsEntity> newsEntities) {
+                return mNewsEntityDataMapper.transform(newsEntities);
             }
         });
     }

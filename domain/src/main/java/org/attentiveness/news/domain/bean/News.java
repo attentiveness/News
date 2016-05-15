@@ -1,24 +1,23 @@
-package org.attentiveness.news.model;
-
+package org.attentiveness.news.domain.bean;
 
 /**
- * News Model
+ * News Bean
  */
-public class NewsModel {
+public class News {
 
     private String channelId;
     private String channelName;
     private String id;
     private String title;
     private String desc;
-    private ImageUrlModel[] imgUrls;
+    private ImageUrl[] imgUrls;
     private String source;
     private String pubDate;
     private String link;
     private String content;
     private String html;
 
-    public NewsModel(String id) {
+    public News(String id) {
         this.id = id;
     }
 
@@ -58,11 +57,11 @@ public class NewsModel {
         this.desc = desc;
     }
 
-    public ImageUrlModel[] getImgUrls() {
+    public ImageUrl[] getImgUrls() {
         return imgUrls;
     }
 
-    public void setImgUrls(ImageUrlModel[] imgUrls) {
+    public void setImgUrls(ImageUrl[] imgUrls) {
         this.imgUrls = imgUrls;
     }
 
@@ -110,7 +109,7 @@ public class NewsModel {
     public String toString() {
         StringBuilder stringBuilder;
         stringBuilder = new StringBuilder();
-        stringBuilder.append("********** News Model **********").append("\n");
+        stringBuilder.append("********** News **********").append("\n");
         stringBuilder.append("id = ").append(this.getId()).append("\n");
         stringBuilder.append("channel id = ").append(this.getChannelId()).append("\n");
         stringBuilder.append("channel name = ").append(this.getChannelName()).append("\n");
@@ -122,7 +121,7 @@ public class NewsModel {
         stringBuilder.append("link = ").append(this.getLink()).append("\n");
         stringBuilder.append("content = ").append(this.getContent()).append("\n");
         stringBuilder.append("html = ").append(this.getHtml()).append("\n");
-        stringBuilder.append("********** News Model **********").append("\n");
+        stringBuilder.append("********** News **********").append("\n");
         return stringBuilder.toString();
     }
 

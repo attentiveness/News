@@ -47,6 +47,7 @@ dependencies {
     compile presentationDependencies.logger
     compile presentationDependencies.rxPreferences
     provided presentationDependencies.javaxAnnotation
+    compile presentationDependencies.picasso
 
     androidTestCompile presentationTestDependencies.mockito
     androidTestCompile presentationTestDependencies.dexmaker
@@ -54,5 +55,4 @@ dependencies {
     androidTestCompile presentationTestDependencies.espresso
     androidTestCompile presentationTestDependencies.testingSupportLib
     androidTestCompile presentationTestDependencies.androidAnnotations
-    compile 'com.android.support:support-v4:23.4.0'
 }

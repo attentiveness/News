@@ -1,24 +1,46 @@
-package org.attentiveness.news.model;
+package org.attentiveness.news.data.entity;
 
+import com.google.gson.annotations.SerializedName;
 
 /**
- * News Model
+ * News Entity
  */
-public class NewsModel {
+public class NewsEntity {
 
-    private String channelId;
-    private String channelName;
+    @SerializedName("nid")
     private String id;
+
+    @SerializedName("channelId")
+    private String channelId;
+
+    @SerializedName("channelName")
+    private String channelName;
+
+    @SerializedName("title")
     private String title;
+
+    @SerializedName("desc")
     private String desc;
-    private ImageUrlModel[] imgUrls;
+
+    @SerializedName("imgageurls")
+    private ImageUrlEntity[] imgUrls;
+
+    @SerializedName("source")
     private String source;
+
+    @SerializedName("pubDate")
     private String pubDate;
+
+    @SerializedName("link")
     private String link;
+
+    @SerializedName("content")
     private String content;
+
+    @SerializedName("html")
     private String html;
 
-    public NewsModel(String id) {
+    public NewsEntity(String id) {
         this.id = id;
     }
 
@@ -58,11 +80,11 @@ public class NewsModel {
         this.desc = desc;
     }
 
-    public ImageUrlModel[] getImgUrls() {
+    public ImageUrlEntity[] getImgUrls() {
         return imgUrls;
     }
 
-    public void setImgUrls(ImageUrlModel[] imgUrls) {
+    public void setImgUrls(ImageUrlEntity[] imgUrls) {
         this.imgUrls = imgUrls;
     }
 
@@ -110,7 +132,7 @@ public class NewsModel {
     public String toString() {
         StringBuilder stringBuilder;
         stringBuilder = new StringBuilder();
-        stringBuilder.append("********** News Model **********").append("\n");
+        stringBuilder.append("********** News Entity **********").append("\n");
         stringBuilder.append("id = ").append(this.getId()).append("\n");
         stringBuilder.append("channel id = ").append(this.getChannelId()).append("\n");
         stringBuilder.append("channel name = ").append(this.getChannelName()).append("\n");
@@ -122,7 +144,7 @@ public class NewsModel {
         stringBuilder.append("link = ").append(this.getLink()).append("\n");
         stringBuilder.append("content = ").append(this.getContent()).append("\n");
         stringBuilder.append("html = ").append(this.getHtml()).append("\n");
-        stringBuilder.append("********** News Model **********").append("\n");
+        stringBuilder.append("********** News Entity **********").append("\n");
         return stringBuilder.toString();
     }
 

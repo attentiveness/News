@@ -28,10 +28,10 @@ public class Channel {
     public String toString() {
         StringBuilder stringBuilder;
         stringBuilder = new StringBuilder();
-        stringBuilder.append("********** Channel Bean **********").append("\n");
+        stringBuilder.append("********** Channel **********").append("\n");
         stringBuilder.append("id = ").append(this.getId()).append("\n");
         stringBuilder.append("name = ").append(this.getName()).append("\n");
-        stringBuilder.append("********** Channel Bean **********").append("\n");
+        stringBuilder.append("********** Channel **********").append("\n");
         return stringBuilder.toString();
     }
 }

@@ -1,6 +1,7 @@
 package org.attentiveness.news.data.net;
 
 import org.attentiveness.news.data.entity.ChannelEntity;
+import org.attentiveness.news.data.entity.NewsEntity;
 
 import java.util.List;
 
@@ -13,5 +14,7 @@ public interface RestApi {
 
     String API_BASE_URL = "http://apis.baidu.com/showapi_open_bus/channel_news/";
 
-    Observable<List<ChannelEntity>> getChannelList();
+    Observable<List<ChannelEntity>> getChannelEntityList();
+
+    Observable<List<NewsEntity>> getNewsEntityList();
 }
