@@ -5,8 +5,10 @@ import android.content.Context;
 import org.attentiveness.news.AndroidApplication;
 import org.attentiveness.news.UIThread;
 import org.attentiveness.news.data.executor.JobExecutor;
+import org.attentiveness.news.data.repository.NewsDataRepository;
 import org.attentiveness.news.domain.executor.PostExecutionThread;
 import org.attentiveness.news.domain.executor.ThreadExecutor;
+import org.attentiveness.news.domain.repository.NewsRepository;
 
 import javax.inject.Singleton;
 
@@ -41,6 +43,12 @@ public class ApplicationModule {
     @Singleton
     PostExecutionThread providePostExecutionThread(UIThread uiThread) {
         return uiThread;
+    }
+
+    @Provides
+    @Singleton
+    NewsRepository provideNewsRepository(NewsDataRepository newsDataRepository) {
+        return newsDataRepository;
     }
 
 }

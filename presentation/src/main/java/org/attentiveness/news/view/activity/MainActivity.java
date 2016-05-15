@@ -18,6 +18,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import org.attentiveness.news.R;
+import org.attentiveness.news.internal.di.HasComponent;
+import org.attentiveness.news.internal.di.components.DaggerNewsComponent;
+import org.attentiveness.news.internal.di.components.NewsComponent;
 import org.attentiveness.news.view.fragment.EducationNewsListFragment;
 import org.attentiveness.news.view.fragment.InternetNewsListFragment;
 import org.attentiveness.news.view.fragment.FinanceNewsListFragment;
@@ -27,7 +30,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener,
+        HasComponent<NewsComponent> {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -42,6 +46,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @BindView(R.id.vp_news_list)
     ViewPager mVpNewsList;
 
+    private NewsComponent mNewsComponent;
     private static String[] mTabTexts = new String[4];
 
     @Override
@@ -50,7 +55,15 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        initInjector();
         init();
+    }
+
+    private void initInjector() {
+        mNewsComponent = DaggerNewsComponent.builder()
+                .applicationComponent(getApplicationComponent())
+                .activityModule(getActivityModule())
+                .build();
     }
 
     private void init() {
@@ -119,6 +132,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public NewsComponent getComponent() {
+        return mNewsComponent;
     }
 
     private static class NewsListAdapter extends FragmentStatePagerAdapter {

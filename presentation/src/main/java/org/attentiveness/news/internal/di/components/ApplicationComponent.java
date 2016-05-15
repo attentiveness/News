@@ -4,6 +4,7 @@ import android.content.Context;
 
 import org.attentiveness.news.domain.executor.PostExecutionThread;
 import org.attentiveness.news.domain.executor.ThreadExecutor;
+import org.attentiveness.news.domain.repository.NewsRepository;
 import org.attentiveness.news.internal.di.modules.ApplicationModule;
 import org.attentiveness.news.view.activity.BaseActivity;
 
@@ -26,5 +27,7 @@ public interface ApplicationComponent {
     ThreadExecutor threadExecutor();
 
     PostExecutionThread postExecutionThread();
+
+    NewsRepository newsRepository();
 
 }

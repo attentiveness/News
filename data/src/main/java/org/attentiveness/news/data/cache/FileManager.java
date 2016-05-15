@@ -1,4 +1,4 @@
-package org.attentiveness.news.data;
+package org.attentiveness.news.data.cache;
 
 
 import android.content.Context;

@@ -13,6 +13,9 @@
     <string name="tab_finance">Finance</string>
     <string name="tab_education">Education</string>
 
+    <string name="exception_message_generic">Application Error</string>
+    <string name="exception_message_no_connection">No Network Connection</string>
+
     <array name="tab_text_array">
         <item>Internet</item>
         <item>Tech</item>
