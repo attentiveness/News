@@ -31,8 +31,7 @@
                 android:layout_marginBottom="5dp"
                 android:maxLines="2"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textSize="18sp"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -64,5 +63,5 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/black"/>
+        android:background="@android:color/darker_gray"/>
 </LinearLayout>

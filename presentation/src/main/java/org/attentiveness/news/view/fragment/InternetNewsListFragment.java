@@ -3,7 +3,9 @@ package org.attentiveness.news.view.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -27,10 +29,12 @@ import butterknife.ButterKnife;
 /**
  * Internet News List
  */
-public class InternetNewsListFragment extends BaseFragment implements NewsListView {
+public class InternetNewsListFragment extends BaseFragment implements NewsListView, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.rv_news_list)
     RecyclerView mRvInternetNewsList;
+    @BindView(R.id.srl_refresh_news)
+    SwipeRefreshLayout mSrlNews;
 
     @Inject
     NewsListPresenter mNewsListPresenter;
@@ -56,12 +60,19 @@ public class InternetNewsListFragment extends BaseFragment implements NewsListVi
         View view = inflater.inflate(R.layout.fragment_internet_news_list, container, false);
         ButterKnife.bind(this, view);
         setupRecyclerView();
+        setupSwipeRefreshLayout();
         return view;
     }
 
     private void setupRecyclerView() {
         mRvInternetNewsList.setLayoutManager(new LinearLayoutManager(getContext()));
         mRvInternetNewsList.setAdapter(mInternetNewsAdapter);
+    }
+
+    private void setupSwipeRefreshLayout() {
+        mSrlNews.setOnRefreshListener(this);
+        mSrlNews.setColorSchemeColors(android.R.color.holo_blue_light, android.R.color.holo_red_light,
+                android.R.color.holo_green_light, android.R.color.holo_orange_light);
     }
 
     @Override
@@ -126,5 +137,15 @@ public class InternetNewsListFragment extends BaseFragment implements NewsListVi
     @Override
     public void renderNewsList(Collection<NewsModel> newsModelCollection) {
         mInternetNewsAdapter.setNewsList(newsModelCollection);
+    }
+
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mSrlNews.setRefreshing(false);
+            }
+        }, 5000);
     }
 }
