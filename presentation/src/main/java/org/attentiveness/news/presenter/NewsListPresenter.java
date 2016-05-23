@@ -95,7 +95,7 @@ public class NewsListPresenter implements Presenter {
 
         @Override
         public void onCompleted() {
-
+            hideViewRetry();
         }
 
         @Override
