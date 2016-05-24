@@ -25,7 +25,7 @@ public class NewsDataStoreFactory {
     }
 
     public NewsDataStore createCloudDataStore() {
-        RestApi restApi = RestApiImpl.getInstance();
+        RestApi restApi = RestApiImpl.getInstance(mContext);
         return new CloudNewsDataStore(restApi);
     }
 
