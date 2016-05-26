@@ -2,7 +2,6 @@ package org.attentiveness.news.view.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +53,6 @@ public class InternetNewsAdapter extends RecyclerView.Adapter<InternetNewsAdapte
         if (newsModel.getImgUrls() != null && newsModel.getImgUrls().length != 0) {
             String url = newsModel.getImgUrls()[0].getUrl();
             Picasso.with(mContext).load(url).into(holder.mIvNews);
-            Log.e("NewsAdapter", "url: " + url);
         }
     }
 

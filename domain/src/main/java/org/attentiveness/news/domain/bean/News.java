@@ -115,7 +115,7 @@ public class News {
         stringBuilder.append("channel name = ").append(this.getChannelName()).append("\n");
         stringBuilder.append("title = ").append(this.getTitle()).append("\n");
         stringBuilder.append("description = ").append(this.getDesc()).append("\n");
-        stringBuilder.append("image number = ").append(this.getImgUrls().length).append("\n");
+        stringBuilder.append("image number = ").append(this.getImgUrls() == null ? 0 : this.getImgUrls().length).append("\n");
         stringBuilder.append("source = ").append(this.getSource()).append("\n");
         stringBuilder.append("public date = ").append(this.getPubDate()).append("\n");
         stringBuilder.append("link = ").append(this.getLink()).append("\n");
