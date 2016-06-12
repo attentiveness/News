@@ -10,6 +10,7 @@ public class NewsListPresenter implements NewsListContract.Presenter {
 
     private NewsListContract.View mView;
     private NewsListUseCase mUseCase;
+    private boolean mFirstLoad = true;
 
     public NewsListPresenter(NewsListContract.View view) {
         this.mView = view;
@@ -24,12 +25,13 @@ public class NewsListPresenter implements NewsListContract.Presenter {
     @Override
     public void getNewsList(boolean forceRefresh, String channelId, int currentPage, int needContent, int needHtml) {
         mView.showLoading();
-        if (forceRefresh) {
+        if (forceRefresh || mFirstLoad) {
             mUseCase.refresh();
             mUseCase.getNewsList(channelId, currentPage, needContent, needHtml, new ReplaceListSubscriber());
         } else {
             mUseCase.getNewsList(channelId, currentPage, needContent, needHtml, new AppendListSubscriber());
         }
+        mFirstLoad = false;
     }
 
     @Override

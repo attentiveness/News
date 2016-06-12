@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -76,8 +77,12 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
             @Override
             public void onLoadMore(int currentPage) {
                 if (currentPage <= mTotalPages) {
+                    mAdapter.setHasMoreData(true);
                     mCurrentPage = currentPage;
+                    Log.e("load more", "current page: " + mCurrentPage);
                     mPresenter.getNewsList(false, mChannelId, mCurrentPage, mNeedContent, mNeedHtml);
+                } else {
+                    mAdapter.setHasMoreData(false);
                 }
             }
         };
@@ -153,11 +158,13 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
 
     @Override
     public void onRefresh() {
+        mCurrentPage = 1;
         mPresenter.getNewsList(true, mChannelId, mCurrentPage, mNeedContent, mNeedHtml);
     }
 
     @OnClick(R.id.btn_retry)
     void requestNewsList() {
+        mCurrentPage = 1;
         mPresenter.getNewsList(true, mChannelId, mCurrentPage, mNeedContent, mNeedHtml);
     }
 

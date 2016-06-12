@@ -52,8 +52,8 @@ public class NewsRepository implements NewsDataSource {
     }
 
     @Override
-    public Observable<News> getNews(String newsId) {
-        return mRemoteDataSource.getNews(newsId);
+    public Observable<News> getNews(String newsId, String title) {
+        return mRemoteDataSource.getNews(newsId, title);
     }
 
     @Override
@@ -64,9 +64,9 @@ public class NewsRepository implements NewsDataSource {
     }
 
     @Override
-    public void deleteNews(String newsId) {
-        mRemoteDataSource.deleteNews(newsId);
-        mLocalDataSource.deleteNews(newsId);
+    public void deleteNews(String newsId, String title) {
+        mRemoteDataSource.deleteNews(newsId, title);
+        mLocalDataSource.deleteNews(newsId, title);
         mCachedNews.remove(newsId);
     }
 

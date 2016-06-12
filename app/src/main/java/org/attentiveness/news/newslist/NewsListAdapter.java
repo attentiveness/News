@@ -48,6 +48,8 @@ public class NewsListAdapter extends BaseAdapter<News, NewsListAdapter.ViewHolde
         String url = news.getImgUrls() != null && news.getImgUrls().length > 0 ? news.getImgUrls()[0].getUrl() : "";
         if (!"".equals(url)) {
             Picasso.with(mContext).load(url).into(holder.mIvNews);
+        } else {
+            Picasso.with(mContext).load(R.mipmap.ic_launcher).into(holder.mIvNews);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +69,10 @@ public class NewsListAdapter extends BaseAdapter<News, NewsListAdapter.ViewHolde
         mItemList.clear();
         mItemList = list;
         notifyDataSetChanged();
+    }
+
+    public void setHasMoreData(boolean hasMoreData) {
+        mHasMoreData = hasMoreData;
     }
 
     public void appendItemList(List<News> list) {

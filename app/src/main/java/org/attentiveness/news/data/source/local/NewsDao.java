@@ -36,11 +36,11 @@ public class NewsDao {
 
     public void update(News news) {
         ContentValues values = entityToContentValue(news);
-        mDatabase.update(DBHelper.TABLE_NAME, values, "nid = ?", new String[]{news.getId()});
+        mDatabase.update(DBHelper.TABLE_NAME, values, "nid = ? or title = ?", new String[]{news.getId(), news.getTitle()});
     }
 
-    public void delete(String newsId) {
-        mDatabase.delete(DBHelper.TABLE_NAME, "nid = ?", new String[]{newsId});
+    public void delete(String newsId, String title) {
+        mDatabase.delete(DBHelper.TABLE_NAME, "nid = ? or title = ?", new String[]{newsId, title});
     }
 
     public void deleteByChannel(String channelId) {
@@ -51,9 +51,9 @@ public class NewsDao {
         mDatabase.delete(DBHelper.TABLE_NAME, null, null);
     }
 
-    public News query(String newsId) {
-        Cursor cursor = mDatabase.query(DBHelper.TABLE_NAME, null, "nid = ?", new String[]{newsId}, null, null, null);
-        News news = new News();
+    public News query(String newsId, String title) {
+        Cursor cursor = mDatabase.query(DBHelper.TABLE_NAME, null, "nid = ? or title = ?", new String[]{newsId, title}, null, null, null);
+        News news = null;
         if (cursor.moveToFirst()) {
             news = cursorToEntity(cursor);
         }

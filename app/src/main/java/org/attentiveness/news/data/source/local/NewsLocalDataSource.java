@@ -33,13 +33,13 @@ public class NewsLocalDataSource implements NewsDataSource {
     }
 
     @Override
-    public Observable<News> getNews(String newsId) {
-        return Observable.just(mNewsDao.query(newsId));
+    public Observable<News> getNews(String newsId, String title) {
+        return Observable.just(mNewsDao.query(newsId, title));
     }
 
     @Override
     public void saveNews(News news) {
-        if (mNewsDao.query(news.getId()) == null) {
+        if (mNewsDao.query(news.getId(), news.getTitle()) == null) {
             mNewsDao.insert(news);
         } else {
             mNewsDao.update(news);
@@ -47,8 +47,8 @@ public class NewsLocalDataSource implements NewsDataSource {
     }
 
     @Override
-    public void deleteNews(String newsId) {
-        mNewsDao.delete(newsId);
+    public void deleteNews(String newsId, String title) {
+        mNewsDao.delete(newsId, title);
     }
 
     @Override

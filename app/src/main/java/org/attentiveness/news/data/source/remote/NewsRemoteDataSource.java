@@ -32,7 +32,7 @@ public class NewsRemoteDataSource implements NewsDataSource {
     }
 
     @Override
-    public Observable<News> getNews(String newsId) {
+    public Observable<News> getNews(String newsId, String title) {
         return Observable.just(null);
     }
 
@@ -42,7 +42,7 @@ public class NewsRemoteDataSource implements NewsDataSource {
     }
 
     @Override
-    public void deleteNews(String newsId) {
+    public void deleteNews(String newsId, String title) {
 
     }
 
