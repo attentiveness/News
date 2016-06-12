@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">News</string>
+
+    <string name="title_activity_news_list">News</string>
+    <string name="title_activity_news_detail">NewsDetailActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="tab_internet">Internet</string>
+    <string name="tab_tech">Tech</string>
+    <string name="tab_finance">Finance</string>
+    <string name="tab_education">Education</string>
+
+    <string name="exception_message_generic">Application Error</string>
+    <string name="exception_message_no_connection">No Network Connection</string>
+
+    <string name="iv_content_description">Img</string>
+
+    <string name="btn_retry">Retry</string>
+
+    <string name="tv_loading">加载中…</string>
+    <string name="tv_no_more_data">没有更多数据了</string>
+    <string name="tv_news">News</string>
+
+    <array name="tab_text_array">
+        <item>Internet</item>
+        <item>Tech</item>
+        <item>Finance</item>
+        <item>Education</item>
+    </array>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

@@ -1,0 +1,27 @@
+<org.attentiveness.news.newslist.ScrollChildSwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/srl_refresh_news"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="org.attentiveness.news.newslist.NewsListFragment">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_news_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_retry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/btn_retry"
+            android:visibility="gone"/>
+
+    </FrameLayout>
+</org.attentiveness.news.newslist.ScrollChildSwipeRefreshLayout>
