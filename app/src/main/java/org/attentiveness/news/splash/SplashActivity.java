@@ -3,14 +3,14 @@ package org.attentiveness.news.splash;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
 import org.attentiveness.news.R;
+import org.attentiveness.news.base.BaseActivity;
 import org.attentiveness.news.list.NewsListActivity;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
 
     private CountDownTimer mTimer;
 
