@@ -1,10 +1,13 @@
 .idea/
 .gradle/
-local.properties
+
 build/
 */build/
 
+local.properties
+
 *.iml
+*/*.iml
 
 # Crashlytics configuations
 com_crashlytics_export_strings.xml
