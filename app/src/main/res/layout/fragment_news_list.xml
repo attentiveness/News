@@ -1,10 +1,10 @@
-<org.attentiveness.news.newslist.ScrollChildSwipeRefreshLayout
+<org.attentiveness.news.list.ScrollChildSwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/srl_refresh_news"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.attentiveness.news.newslist.NewsListFragment">
+    tools:context="org.attentiveness.news.list.NewsListFragment">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -24,4 +24,4 @@
             android:visibility="gone"/>
 
     </FrameLayout>
-</org.attentiveness.news.newslist.ScrollChildSwipeRefreshLayout>
+</org.attentiveness.news.list.ScrollChildSwipeRefreshLayout>

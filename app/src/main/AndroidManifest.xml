@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="org.attentiveness.news">
+    package="org.attentiveness.news">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,20 +11,31 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".newslist.NewsListActivity"
-            android:label="@string/title_activity_news_list"
+            android:name=".splash.SplashActivity"
+            android:label="@string/title_activity_splash"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".newsdetail.NewsDetailActivity"
+            android:name=".list.NewsListActivity"
+            android:label="@string/title_activity_news_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".detail.NewsDetailActivity"
             android:label="@string/title_activity_news_detail"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".channel.NewsChannelActivity"
+            android:label="@string/title_activity_news_channel"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".about.AboutUsActivity"
+            android:label="@string/title_activity_about_us"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
