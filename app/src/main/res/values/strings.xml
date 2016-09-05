@@ -26,10 +26,13 @@
     <string name="iv_content_description">Img</string>
 
     <string name="btn_retry">Retry</string>
+    <string name="btn_edit">编辑</string>
+    <string name="btn_done">完成</string>
 
     <string name="tv_loading">加载中…</string>
     <string name="tv_no_more_data">没有更多数据了</string>
     <string name="tv_news">News</string>
+    <string name="tv_my_channel">我的频道</string>
 
     <array name="tab_text_array">
         <item>Internet</item>
@@ -39,5 +42,6 @@
     </array>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tv_channel_recommended">推荐频道</string>
 
 </resources>

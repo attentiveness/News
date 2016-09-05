@@ -6,4 +6,14 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="button_inset_horizontal_material">@dimen/button_inset_material</dimen>
+    <dimen name="button_inset_material">4dp</dimen>
+    <dimen name="button_inset_vertical_material">6dp</dimen>
+
+    <dimen name="button_corner_material">2dp</dimen>
+
+    <dimen name="button_padding_horizontal_material">8dp</dimen>
+    <dimen name="button_padding_vertical_material">@dimen/button_padding_material</dimen>
+    <dimen name="button_padding_material">4dp</dimen>
 </resources>
