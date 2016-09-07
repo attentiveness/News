@@ -2,6 +2,7 @@ package org.attentiveness.news.channel;
 
 
 import android.os.Bundle;
+import android.support.v7.widget.GridLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,17 +10,20 @@ import android.view.ViewGroup;
 import org.attentiveness.news.R;
 import org.attentiveness.news.base.BaseFragment;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
 public class NewsChannelFragment extends BaseFragment {
 
+    @Bind(R.id.gl_my_channel_list)
+    GridLayout mGlMyChannelList;
+    @Bind(R.id.gl_channel_list_recommended)
+    GridLayout mGlChannelListRecommended;
+
     public static NewsChannelFragment newInstance() {
-        Bundle args = new Bundle();
-        NewsChannelFragment fragment = new NewsChannelFragment();
-        fragment.setArguments(args);
-        return fragment;
+        return new NewsChannelFragment();
     }
 
     public NewsChannelFragment() {

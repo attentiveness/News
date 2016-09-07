@@ -16,4 +16,10 @@
     <dimen name="button_padding_horizontal_material">8dp</dimen>
     <dimen name="button_padding_vertical_material">@dimen/button_padding_material</dimen>
     <dimen name="button_padding_material">4dp</dimen>
+
+    <dimen name="button_min_width">88dp</dimen>
+    <dimen name="button_min_height">48dp</dimen>
+
+    <dimen name="tv_min_width">75dp</dimen>
+    <dimen name="tv_min_height">35dp</dimen>
 </resources>
