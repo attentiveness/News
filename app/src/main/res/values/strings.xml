@@ -33,6 +33,7 @@
     <string name="tv_no_more_data">没有更多数据了</string>
     <string name="tv_news">News</string>
     <string name="tv_my_channel">我的频道</string>
+    <string name="tv_channel_recommended">推荐频道</string>
 
     <array name="tab_text_array">
         <item>Internet</item>
@@ -42,6 +43,5 @@
     </array>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="tv_channel_recommended">推荐频道</string>
 
 </resources>

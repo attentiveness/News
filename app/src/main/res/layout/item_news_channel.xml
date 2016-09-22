@@ -5,12 +5,12 @@
     android:background="@drawable/shape_rectangle">
 
     <TextView
+        android:id="@+id/tv_channel_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:minHeight="@dimen/tv_min_height"
         android:minWidth="@dimen/tv_min_width"
-        android:text="推荐"
         android:textColor="@android:color/black" />
 
     <ImageView
