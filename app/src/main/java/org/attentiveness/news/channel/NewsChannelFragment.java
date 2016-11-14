@@ -74,6 +74,11 @@ public class NewsChannelFragment extends BaseFragment {
         getActivity().finish();
     }
 
+    @OnClick(R.id.iv_remove)
+    void removeItem(){
+
+    }
+
     @OnClick(R.id.btn_edit_or_done)
     void editOrDone() {
         if (mBtnEditOrDone.getText().toString().equals(getString(R.string.btn_edit))) {
@@ -89,10 +94,10 @@ public class NewsChannelFragment extends BaseFragment {
     private void updateViews() {
         if (mStatus == BUTTON_STATUS.EDITABLE) {
             mIvRemove.setVisibility(View.VISIBLE);
-            updateTextViews(mGlMyChannelList, true);
+//            updateTextViews(mGlMyChannelList, true);
         } else {
             mIvRemove.setVisibility(View.GONE);
-            updateTextViews(mGlMyChannelList, false);
+//            updateTextViews(mGlMyChannelList, false);
         }
     }
 
