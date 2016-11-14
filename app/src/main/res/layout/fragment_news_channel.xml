@@ -110,18 +110,6 @@
                 android:layout_height="wrap_content"
                 app:layout_columnWeight="1" />
 
-            <include
-                layout="@layout/item_news_channel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_columnWeight="1" />
-
-            <include
-                layout="@layout/item_news_channel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_columnWeight="1" />
-
         </android.support.v7.widget.GridLayout>
 
     </LinearLayout>
@@ -154,18 +142,6 @@
             android:layout_marginStart="-4dp"
             app:columnCount="4"
             app:useDefaultMargins="true">
-
-            <include
-                layout="@layout/item_news_channel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_columnWeight="1" />
-
-            <include
-                layout="@layout/item_news_channel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_columnWeight="1" />
 
             <include
                 layout="@layout/item_news_channel"

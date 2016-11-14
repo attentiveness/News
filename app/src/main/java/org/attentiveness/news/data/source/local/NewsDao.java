@@ -31,28 +31,28 @@ public class NewsDao {
 
     public void insert(News news) {
         ContentValues values = entityToContentValue(news);
-        mDatabase.insertOrThrow(DBHelper.TABLE_NAME, null, values);
+        mDatabase.insertOrThrow(DBHelper.TABLE_NEWS_NAME, null, values);
     }
 
     public void update(News news) {
         ContentValues values = entityToContentValue(news);
-        mDatabase.update(DBHelper.TABLE_NAME, values, "nid = ? or title = ?", new String[]{news.getId(), news.getTitle()});
+        mDatabase.update(DBHelper.TABLE_NEWS_NAME, values, "nid = ? or title = ?", new String[]{news.getId(), news.getTitle()});
     }
 
     public void delete(String newsId, String title) {
-        mDatabase.delete(DBHelper.TABLE_NAME, "nid = ? or title = ?", new String[]{newsId, title});
+        mDatabase.delete(DBHelper.TABLE_NEWS_NAME, "nid = ? or title = ?", new String[]{newsId, title});
     }
 
     public void deleteByChannel(String channelId) {
-        mDatabase.delete(DBHelper.TABLE_NAME, "channel_id = ?", new String[]{channelId});
+        mDatabase.delete(DBHelper.TABLE_NEWS_NAME, "channel_id = ?", new String[]{channelId});
     }
 
     public void deleteAll() {
-        mDatabase.delete(DBHelper.TABLE_NAME, null, null);
+        mDatabase.delete(DBHelper.TABLE_NEWS_NAME, null, null);
     }
 
     public News query(String newsId, String title) {
-        Cursor cursor = mDatabase.query(DBHelper.TABLE_NAME, null, "nid = ? or title = ?", new String[]{newsId, title}, null, null, null);
+        Cursor cursor = mDatabase.query(DBHelper.TABLE_NEWS_NAME, null, "nid = ? or title = ?", new String[]{newsId, title}, null, null, null);
         News news = null;
         if (cursor.moveToFirst()) {
             news = cursorToEntity(cursor);
@@ -62,7 +62,7 @@ public class NewsDao {
     }
 
     public List<News> queryByChannel(String channelId) {
-        Cursor cursor = mDatabase.query(DBHelper.TABLE_NAME, null, "channel_id = ?", new String[]{channelId}, null, null, null);
+        Cursor cursor = mDatabase.query(DBHelper.TABLE_NEWS_NAME, null, "channel_id = ?", new String[]{channelId}, null, null, null);
         List<News> list = new ArrayList<>();
         while (cursor.moveToNext()) {
             list.add(cursorToEntity(cursor));
@@ -72,7 +72,7 @@ public class NewsDao {
     }
 
     public List<News> queryAll() {
-        Cursor cursor = mDatabase.query(DBHelper.TABLE_NAME, null, null, null, null, null, null);
+        Cursor cursor = mDatabase.query(DBHelper.TABLE_NEWS_NAME, null, null, null, null, null, null);
         List<News> list = new ArrayList<>();
         while (cursor.moveToNext()) {
             list.add(cursorToEntity(cursor));

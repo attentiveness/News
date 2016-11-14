@@ -7,21 +7,52 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    final static String DATABASE_NAME = "News.db";
-    final static String TABLE_NAME = "News";
-    final static String TABLE_CREATE = "create table " + TABLE_NAME + "("
-            + "_id integer primary key autoincrement,"
-            + "nid text,"
-            + "channel_id text,"
-            + "channel_name text,"
-            + "title text,"
-            + "description text,"
-            + "image_url text,"
-            + "source text,"
-            + "pub_date text,"
-            + "link text"
+    private static final String DATABASE_NAME = "News.db";
+
+    static final String TABLE_NEWS_NAME = "News";
+    private static final String TABLE_NEWS_CREATE = "CREATE TABLE " + TABLE_NEWS_NAME + "("
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + "nid TEXT,"
+            + "channel_id TEXT,"
+            + "channel_name TEXT,"
+            + "title TEXT,"
+            + "description TEXT,"
+            + "image_url TEXT,"
+            + "source TEXT,"
+            + "pub_date TEXT,"
+            + "link TEXT"
             + ");";
-    final static String TABLE_DROP = "drop table if exists " + TABLE_NAME;
+    private static final String TABLE_NEWS_DROP = "DROP TABLE IF EXISTS " + TABLE_NEWS_NAME;
+
+    static final String TABLE_CHANNEL_NAME = "Channel";
+    private static final String TABLE_CHANNEL_CREATE = "CREATE TABLE " + TABLE_CHANNEL_NAME + "("
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + "nid TEXT,"
+            + "channel_id TEXT,"
+            + "channel_name TEXT,"
+            + "title TEXT,"
+            + "description TEXT,"
+            + "image_url TEXT,"
+            + "source TEXT,"
+            + "pub_date TEXT,"
+            + "link TEXT"
+            + ");";
+    private static final String TABLE_CHANNEL_DROP = "DROP TABLE IF EXISTS " + TABLE_NEWS_NAME;
+
+    static final String TABLE_MY_CHANNEL_NAME = "MyChannel";
+    private static final String TABLE_MY_CHANNEL_CREATE = "CREATE TABLE " + TABLE_NEWS_NAME + "("
+            + "_id INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + "nid TEXT,"
+            + "channel_id TEXT,"
+            + "channel_name TEXT,"
+            + "title TEXT,"
+            + "description TEXT,"
+            + "image_url TEXT,"
+            + "source TEXT,"
+            + "pub_date TEXT,"
+            + "link TEXT"
+            + ");";
+    private static final String TABLE_MY_CHANNEL_DROP = "DROP TABLE IF EXISTS " + TABLE_NEWS_NAME;
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -33,12 +64,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(TABLE_CREATE);
+        db.execSQL(TABLE_NEWS_CREATE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL(TABLE_DROP);
+        db.execSQL(TABLE_NEWS_DROP);
         onCreate(db);
     }
 }
