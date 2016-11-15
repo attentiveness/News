@@ -2,6 +2,7 @@ package org.attentiveness.news.net;
 
 
 import org.attentiveness.news.data.ApiResponseFunc;
+import org.attentiveness.news.data.Channel;
 import org.attentiveness.news.data.News;
 import org.attentiveness.news.data.Page;
 
@@ -61,6 +62,10 @@ public class RestApi {
                         return page.getBody().getTotalPagesNum();
                     }
                 });
+    }
+
+    public Observable<Channel> getChannelList() {
+        return null;
     }
 
 }

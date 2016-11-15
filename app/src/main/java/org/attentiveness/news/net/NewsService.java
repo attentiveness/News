@@ -2,6 +2,7 @@ package org.attentiveness.news.net;
 
 
 import org.attentiveness.news.data.ApiResponse;
+import org.attentiveness.news.data.Channel;
 import org.attentiveness.news.data.Page;
 
 import retrofit2.http.GET;
@@ -21,4 +22,9 @@ public interface NewsService {
     @Headers("apikey: " + API_KEY)
     @GET("search_news")
     Observable<ApiResponse<Page>> getNewsList(@Query("channelId") String channelId);
+
+    @Headers("apikey: " + API_KEY)
+    @GET("channel_news")
+    Observable<ApiResponse<Channel>> getChannelList();
+
 }

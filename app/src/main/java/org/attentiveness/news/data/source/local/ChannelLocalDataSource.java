@@ -9,6 +9,7 @@ import java.util.List;
 import rx.Observable;
 
 public class ChannelLocalDataSource implements ChannelDataSource{
+
     @Override
     public Observable<List<Channel.Detail>> getChannelList() {
         return null;

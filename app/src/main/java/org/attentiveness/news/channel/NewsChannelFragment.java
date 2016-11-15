@@ -4,6 +4,8 @@ package org.attentiveness.news.channel;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayout;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,10 +27,10 @@ import butterknife.OnClick;
 
 public class NewsChannelFragment extends BaseFragment {
 
-    @Bind(R.id.gl_my_channel_list)
-    GridLayout mGlMyChannelList;
-    @Bind(R.id.gl_channel_list_recommended)
-    GridLayout mGlChannelListRecommended;
+    @Bind(R.id.rv_my_channels)
+    RecyclerView mRvMyChannelList;
+    @Bind(R.id.rv_channels_recommended)
+    RecyclerView mRvChannelListRecommended;
     @Bind(R.id.btn_edit_or_done)
     Button mBtnEditOrDone;
     @Bind(R.id.iv_remove)
@@ -37,6 +39,8 @@ public class NewsChannelFragment extends BaseFragment {
     private BUTTON_STATUS mStatus;
     private List<String> mMyChannelList;
     private List<String> mChannelRecommendedList;
+    private MyChannelAdapter mMyAdapter;
+    private ChannelRecommendedAdapter mRecommendedAdapter;
 
     public static NewsChannelFragment newInstance() {
         return new NewsChannelFragment();
@@ -50,7 +54,21 @@ public class NewsChannelFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news_channel, container, false);
         ButterKnife.bind(this, view);
+
+        setupRecyclerViews();
+
         return view;
+    }
+
+    private void setupRecyclerViews() {
+        GridLayoutManager manager = new GridLayoutManager(getActivity(), 4);
+        mMyAdapter = new MyChannelAdapter();
+        mRvMyChannelList.setAdapter(mMyAdapter);
+        mRvMyChannelList.setLayoutManager(manager);
+
+        mRecommendedAdapter = new ChannelRecommendedAdapter();
+        mRvChannelListRecommended.setAdapter(mRecommendedAdapter);
+        mRvChannelListRecommended.setLayoutManager(manager);
     }
 
     @Override
@@ -75,7 +93,7 @@ public class NewsChannelFragment extends BaseFragment {
     }
 
     @OnClick(R.id.iv_remove)
-    void removeItem(){
+    void removeItem() {
 
     }
 
