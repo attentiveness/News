@@ -71,9 +71,13 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
         mAdapter = new NewsListAdapter(getActivity());
         mAdapter.setOnItemClickListener(mOnItemClickListener);
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
+        mRvNewsList.setHasFixedSize(true);
         mRvNewsList.setLayoutManager(manager);
         mRvNewsList.setAdapter(mAdapter);
         LoadMoreListener listener = new LoadMoreListener(manager) {
+            /**
+             * Load more items when SwipeRefreshLayout or its child layout is scrolled upward.
+             */
             @Override
             public void onLoadMore(int currentPage) {
                 if (currentPage <= mTotalPages) {
@@ -108,13 +112,13 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
     }
 
     @Override
-    public void renderNewsList(List<News> newsList) {
+    public void renderFirstPage(List<News> newsList) {
         mAdapter.replaceItemList(newsList);
         mRvNewsList.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void appendNewsList(List<News> newsList) {
+    public void appendPage(List<News> newsList) {
         mAdapter.appendItemList(newsList);
         mRvNewsList.setVisibility(View.VISIBLE);
     }
@@ -156,6 +160,9 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
         ButterKnife.unbind(this);
     }
 
+    /**
+     * Refresh items when SwipeRefreshLayout or its child layout is swiped downward.
+     */
     @Override
     public void onRefresh() {
         mCurrentPage = 1;

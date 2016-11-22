@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DBHelper extends SQLiteOpenHelper {
+class DBHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "News.db";
 
@@ -54,11 +54,11 @@ public class DBHelper extends SQLiteOpenHelper {
             + ");";
     private static final String TABLE_MY_CHANNEL_DROP = "DROP TABLE IF EXISTS " + TABLE_NEWS_NAME;
 
-    public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, 1);
+    DBHelper(Context context) {
+        this(context, DATABASE_NAME, null, 1);
     }
 
-    public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    private DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
 

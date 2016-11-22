@@ -1,10 +1,13 @@
 package org.attentiveness.news.net;
 
 
+import android.util.Log;
+
 import org.attentiveness.news.data.ApiResponseFunc;
 import org.attentiveness.news.data.Channel;
+import org.attentiveness.news.data.ChannelPage;
 import org.attentiveness.news.data.News;
-import org.attentiveness.news.data.Page;
+import org.attentiveness.news.data.NewsPage;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -18,8 +21,8 @@ import rx.functions.Func1;
 
 public class RestApi {
 
-    final static String BASE_URL = "http://apis.baidu.com/showapi_open_bus/channel_news/";
-    final static int DEFAULT_TIMEOUT = 5;
+    private final static String BASE_URL = "http://apis.baidu.com/showapi_open_bus/channel_news/";
+    private final static int DEFAULT_TIMEOUT = 5;
 
     private static RestApi INSTANCE = null;
 
@@ -28,6 +31,7 @@ public class RestApi {
     private RestApi() {
         OkHttpClient.Builder client = new OkHttpClient.Builder();
         client.connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
+        client.readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS);
         Retrofit retrofit = new Retrofit.Builder()
                 .client(client.build())
                 .baseUrl(BASE_URL)
@@ -45,27 +49,34 @@ public class RestApi {
     }
 
     public Observable<List<News>> getNewsList(String channelId, int currentPage, int needContent, int needHtml) {
-        return mNewsService.getNewsList(channelId, currentPage, needContent, needHtml).map(new ApiResponseFunc<Page>())
-                .map(new Func1<Page, List<News>>() {
+        return mNewsService.getNewsList(channelId, currentPage, needContent, needHtml).map(new ApiResponseFunc<NewsPage>())
+                .map(new Func1<NewsPage, List<News>>() {
                     @Override
-                    public List<News> call(Page page) {
+                    public List<News> call(NewsPage page) {
                         return page.getBody().getNewsList();
                     }
                 });
     }
 
     public Observable<Integer> getTotalPages(String channelId) {
-        return mNewsService.getNewsList(channelId).map(new ApiResponseFunc<Page>())
-                .map(new Func1<Page, Integer>() {
+        return mNewsService.getNewsList(channelId).map(new ApiResponseFunc<NewsPage>())
+                .map(new Func1<NewsPage, Integer>() {
                     @Override
-                    public Integer call(Page page) {
+                    public Integer call(NewsPage page) {
                         return page.getBody().getTotalPagesNum();
                     }
                 });
     }
 
-    public Observable<Channel> getChannelList() {
-        return null;
+    public Observable<List<Channel>> getChannelList() {
+        return mNewsService.getChannelList().map(new ApiResponseFunc<ChannelPage>())
+                .map(new Func1<ChannelPage, List<Channel>>() {
+                    @Override
+                    public List<Channel> call(ChannelPage channelPage) {
+                        Log.e(RestApi.class.getSimpleName(), channelPage.toString());
+                        return channelPage.getChannelList();
+                    }
+                });
     }
 
 }

@@ -3,84 +3,32 @@ package org.attentiveness.news.data;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 public class Channel {
 
-    @SerializedName("channelList")
-    private List<Detail> detailList;
+    @SerializedName("channelId")
+    private String channelId;
 
-    @SerializedName("ret_code")
-    private int resultCode;
+    @SerializedName("name")
+    private String name;
 
-    @SerializedName("totalNum")
-    private int totalNum;
-
-    public Channel() {
-
+    public Channel(String channelId, String name) {
+        this.channelId = channelId;
+        this.name = name;
     }
 
-    public List<Detail> getDetailList() {
-        return detailList;
+    public String getChannelId() {
+        return channelId;
     }
 
-    public void setDetailList(List<Detail> detailList) {
-        this.detailList = detailList;
-    }
-
-    public int getResultCode() {
-        return resultCode;
-    }
-
-    public void setResultCode(int resultCode) {
-        this.resultCode = resultCode;
-    }
-
-    public int getTotalNum() {
-        return totalNum;
-    }
-
-    public void setTotalNum(int totalNum) {
-        this.totalNum = totalNum;
+    public String getName() {
+        return name;
     }
 
     @Override
     public String toString() {
         return "Channel{" +
-                "detailList=" + detailList +
-                ", resultCode=" + resultCode +
-                ", totalNum=" + totalNum +
+                "channelId='" + channelId + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
-
-    public class Detail {
-
-        @SerializedName("channelId")
-        private String channelId;
-
-        @SerializedName("name")
-        private String name;
-
-        public Detail(String channelId, String name) {
-            this.channelId = channelId;
-            this.name = name;
-        }
-
-        public String getChannelId() {
-            return channelId;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        @Override
-        public String toString() {
-            return "Detail{" +
-                    "channelId='" + channelId + '\'' +
-                    ", name='" + name + '\'' +
-                    '}';
-        }
-    }
-
 }

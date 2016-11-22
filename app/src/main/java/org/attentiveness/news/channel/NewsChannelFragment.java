@@ -1,6 +1,7 @@
 package org.attentiveness.news.channel;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayout;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 
 import org.attentiveness.news.R;
 import org.attentiveness.news.base.BaseFragment;
+import org.attentiveness.news.data.source.ChannelDataSource;
+import org.attentiveness.news.data.source.ChannelRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +78,19 @@ public class NewsChannelFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         init();
+
+        test();
+    }
+
+    private void test() {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                ChannelDataSource dataSource = ChannelRepository.getInstance(getActivity());
+                dataSource.getChannelList();
+                return null;
+            }
+        };
     }
 
     private void init() {

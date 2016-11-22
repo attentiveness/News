@@ -6,13 +6,13 @@ import org.attentiveness.news.data.News;
 
 import java.util.List;
 
-public class NewsListPresenter implements NewsListContract.Presenter {
+class NewsListPresenter implements NewsListContract.Presenter {
 
     private NewsListContract.View mView;
     private NewsListUseCase mUseCase;
     private boolean mFirstLoad = true;
 
-    public NewsListPresenter(NewsListContract.View view) {
+    NewsListPresenter(NewsListContract.View view) {
         this.mView = view;
         this.mUseCase = new NewsListUseCase(view.getContext());
     }
@@ -27,9 +27,9 @@ public class NewsListPresenter implements NewsListContract.Presenter {
         mView.showLoading();
         if (forceRefresh || mFirstLoad) {
             mUseCase.refresh();
-            mUseCase.getNewsList(channelId, currentPage, needContent, needHtml, new ReplaceListSubscriber());
+            mUseCase.getNewsList(channelId, currentPage, needContent, needHtml, new FirstPageSubscriber());
         } else {
-            mUseCase.getNewsList(channelId, currentPage, needContent, needHtml, new AppendListSubscriber());
+            mUseCase.getNewsList(channelId, currentPage, needContent, needHtml, new AppendPageSubscriber());
         }
         mFirstLoad = false;
     }
@@ -57,7 +57,7 @@ public class NewsListPresenter implements NewsListContract.Presenter {
     }
 
 
-    private class ReplaceListSubscriber extends DefaultSubscriber<List<News>> {
+    private class FirstPageSubscriber extends DefaultSubscriber<List<News>> {
         @Override
         public void onCompleted() {
             mView.hideLoading();
@@ -73,11 +73,11 @@ public class NewsListPresenter implements NewsListContract.Presenter {
 
         @Override
         public void onNext(List<News> newsList) {
-            mView.renderNewsList(newsList);
+            mView.renderFirstPage(newsList);
         }
     }
 
-    private class AppendListSubscriber extends DefaultSubscriber<List<News>> {
+    private class AppendPageSubscriber extends DefaultSubscriber<List<News>> {
         @Override
         public void onCompleted() {
             mView.hideLoading();
@@ -93,7 +93,7 @@ public class NewsListPresenter implements NewsListContract.Presenter {
 
         @Override
         public void onNext(List<News> newsList) {
-            mView.appendNewsList(newsList);
+            mView.appendPage(newsList);
         }
     }
 

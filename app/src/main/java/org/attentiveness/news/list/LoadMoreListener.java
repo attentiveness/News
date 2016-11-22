@@ -4,14 +4,14 @@ package org.attentiveness.news.list;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-public abstract class LoadMoreListener extends RecyclerView.OnScrollListener {
+abstract class LoadMoreListener extends RecyclerView.OnScrollListener {
 
     private int mPreviousTotal = 0;
     private boolean mLoading = false;
     private int mCurrentPage = 1;
     private LinearLayoutManager mLinearLayoutManager;
 
-    public LoadMoreListener(LinearLayoutManager linearLayoutManager) {
+    LoadMoreListener(LinearLayoutManager linearLayoutManager) {
         this.mLinearLayoutManager = linearLayoutManager;
     }
 

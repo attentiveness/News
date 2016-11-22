@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Page {
+public class NewsPage {
 
     @SerializedName("pagebean")
     private Body body;
@@ -13,7 +13,7 @@ public class Page {
     @SerializedName("ret_code")
     private int code;
 
-    public Page() {
+    public NewsPage() {
         //empty
     }
 
@@ -96,7 +96,7 @@ public class Page {
 
         @Override
         public String toString() {
-            return "Page{" +
+            return "NewsPage{" +
                     "totalNewsNum=" + totalNewsNum +
                     ", totalPagesNum=" + totalPagesNum +
                     ", currentPageNum=" + currentPageNum +

@@ -11,7 +11,7 @@ import org.attentiveness.news.data.News;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsDao {
+class NewsDao {
 
     private static NewsDao INSTANCE = null;
 
@@ -29,17 +29,17 @@ public class NewsDao {
         return INSTANCE;
     }
 
-    public void insert(News news) {
+    void insert(News news) {
         ContentValues values = entityToContentValue(news);
         mDatabase.insertOrThrow(DBHelper.TABLE_NEWS_NAME, null, values);
     }
 
-    public void update(News news) {
+    void update(News news) {
         ContentValues values = entityToContentValue(news);
         mDatabase.update(DBHelper.TABLE_NEWS_NAME, values, "nid = ? or title = ?", new String[]{news.getId(), news.getTitle()});
     }
 
-    public void delete(String newsId, String title) {
+    void delete(String newsId, String title) {
         mDatabase.delete(DBHelper.TABLE_NEWS_NAME, "nid = ? or title = ?", new String[]{newsId, title});
     }
 
@@ -47,11 +47,11 @@ public class NewsDao {
         mDatabase.delete(DBHelper.TABLE_NEWS_NAME, "channel_id = ?", new String[]{channelId});
     }
 
-    public void deleteAll() {
+    void deleteAll() {
         mDatabase.delete(DBHelper.TABLE_NEWS_NAME, null, null);
     }
 
-    public News query(String newsId, String title) {
+    News query(String newsId, String title) {
         Cursor cursor = mDatabase.query(DBHelper.TABLE_NEWS_NAME, null, "nid = ? or title = ?", new String[]{newsId, title}, null, null, null);
         News news = null;
         if (cursor.moveToFirst()) {
@@ -61,7 +61,7 @@ public class NewsDao {
         return news;
     }
 
-    public List<News> queryByChannel(String channelId) {
+    List<News> queryByChannel(String channelId) {
         Cursor cursor = mDatabase.query(DBHelper.TABLE_NEWS_NAME, null, "channel_id = ?", new String[]{channelId}, null, null, null);
         List<News> list = new ArrayList<>();
         while (cursor.moveToNext()) {

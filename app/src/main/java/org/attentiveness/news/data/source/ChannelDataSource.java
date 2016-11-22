@@ -9,16 +9,15 @@ import rx.Observable;
 
 public interface ChannelDataSource {
 
-    Observable<List<Channel.Detail>> getChannelList();
+    Observable<List<Channel>> getChannelList();
 
-    Observable<Channel.Detail> getChannel(int channelId);
+    Observable<Channel> getChannel(int channelId);
 
-    void saveChannel(Channel.Detail channel);
+    void saveChannel(Channel channel);
 
     void deleteChannel(String channelId, String name);
 
     void deleteAllChannels();
 
     void refreshChannelList();
-
 }

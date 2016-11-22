@@ -8,19 +8,33 @@ import java.util.List;
 
 import rx.Observable;
 
-public class ChannelRemoteDataSource implements ChannelDataSource{
+public class ChannelRemoteDataSource implements ChannelDataSource {
+
+    private static ChannelRemoteDataSource INSTANCE;
+
+    private ChannelRemoteDataSource() {
+
+    }
+
+    public static ChannelRemoteDataSource getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new ChannelRemoteDataSource();
+        }
+        return INSTANCE;
+    }
+
     @Override
-    public Observable<List<Channel.Detail>> getChannelList() {
+    public Observable<List<Channel>> getChannelList() {
         return null;
     }
 
     @Override
-    public Observable<Channel.Detail> getChannel(int channelId) {
+    public Observable<Channel> getChannel(int channelId) {
         return null;
     }
 
     @Override
-    public void saveChannel(Channel.Detail channel) {
+    public void saveChannel(Channel channel) {
 
     }
 

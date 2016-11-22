@@ -9,13 +9,21 @@ import org.attentiveness.news.data.source.NewsRepository;
 import rx.Subscriber;
 import rx.schedulers.Schedulers;
 
-public class NewsListUseCase extends UseCase {
+class NewsListUseCase extends UseCase {
 
     private NewsRepository mRepository;
 
-    public NewsListUseCase(Context context) {
+    NewsListUseCase(Context context) {
         super();
         this.mRepository = NewsRepository.getInstance(context);
+    }
+
+    @SuppressWarnings("unchecked")
+    void getTotalPage(String channelId, Subscriber subscriber) {
+        mSubscription = mRepository.getTotalPage(channelId)
+                .subscribeOn(Schedulers.from(mThreadExecutor))
+                .observeOn(mPostExecutionThread.getScheduler())
+                .subscribe(subscriber);
     }
 
     @SuppressWarnings("unchecked")
@@ -26,15 +34,7 @@ public class NewsListUseCase extends UseCase {
                 .subscribe(subscriber);
     }
 
-    @SuppressWarnings("unchecked")
-    public void getTotalPage(String channelId, Subscriber subscriber) {
-        mSubscription = mRepository.getTotalPage(channelId)
-                .subscribeOn(Schedulers.from(mThreadExecutor))
-                .observeOn(mPostExecutionThread.getScheduler())
-                .subscribe(subscriber);
-    }
-
-    public void refresh() {
+    void refresh() {
         mRepository.refreshNewsList();
     }
 

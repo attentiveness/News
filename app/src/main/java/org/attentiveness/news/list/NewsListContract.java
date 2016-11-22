@@ -7,14 +7,14 @@ import org.attentiveness.news.data.News;
 
 import java.util.List;
 
-public interface NewsListContract {
+interface NewsListContract {
 
     interface View extends BaseView {
         void saveTotalPage(int totalPage);
 
-        void renderNewsList(List<News> newsList);
+        void renderFirstPage(List<News> newsList);
 
-        void appendNewsList(List<News> newsList);
+        void appendPage(List<News> newsList);
 
         void showError(String message);
     }
