@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/content"
+        android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_news_channel"
-            android:icon="@drawable/ic_news_channel"
-            android:title="@string/nav_news_channel" />
+            android:id="@+id/nav_home"
+            android:checked="true"
+            android:icon="@drawable/ic_home"
+            android:orderInCategory="0"
+            android:title="@string/nav_home"/>
+    </group>
+
+    <group
+        android:id="@+id/settings"
+        android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_about_us"
-            android:icon="@drawable/ic_about_us"
-            android:title="@string/nav_about_us" />
+            android:id="@+id/nav_feedback"
+            android:icon="@drawable/ic_feedback"
+            android:orderInCategory="1"
+            android:title="@string/nav_feedback"/>
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_about"
+            android:orderInCategory="1"
+            android:title="@string/nav_about"/>
     </group>
 
 </menu>
