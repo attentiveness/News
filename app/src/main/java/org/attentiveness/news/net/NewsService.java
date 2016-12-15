@@ -3,6 +3,7 @@ package org.attentiveness.news.net;
 
 import org.attentiveness.news.data.ApiResponse;
 import org.attentiveness.news.data.ChannelPage;
+import org.attentiveness.news.data.DailyNews;
 import org.attentiveness.news.data.NewsPage;
 
 import retrofit2.http.GET;
@@ -26,5 +27,8 @@ interface NewsService {
     @Headers("apikey: " + API_KEY)
     @GET("channel_news")
     Observable<ApiResponse<ChannelPage>> getChannelList();
+
+    @GET("latest")
+    Observable<DailyNews> getNewsList();
 
 }

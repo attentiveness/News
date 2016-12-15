@@ -3,6 +3,7 @@ package org.attentiveness.news.data.source.local;
 
 import android.content.Context;
 
+import org.attentiveness.news.data.DailyNews;
 import org.attentiveness.news.data.News;
 import org.attentiveness.news.data.source.NewsDataSource;
 
@@ -64,5 +65,10 @@ public class NewsLocalDataSource implements NewsDataSource {
     @Override
     public Observable<Integer> getTotalPage(String channelId) {
         return Observable.just(0);
+    }
+
+    @Override
+    public Observable<DailyNews> getNewsList() {
+        return null;
     }
 }

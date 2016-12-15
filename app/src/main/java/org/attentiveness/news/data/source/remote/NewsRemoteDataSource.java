@@ -1,6 +1,7 @@
 package org.attentiveness.news.data.source.remote;
 
 
+import org.attentiveness.news.data.DailyNews;
 import org.attentiveness.news.data.News;
 import org.attentiveness.news.data.source.NewsDataSource;
 import org.attentiveness.news.net.RestApi;
@@ -59,5 +60,10 @@ public class NewsRemoteDataSource implements NewsDataSource {
     @Override
     public Observable<Integer> getTotalPage(String channelId) {
         return mRestApi.getTotalPages(channelId);
+    }
+
+    @Override
+    public Observable<DailyNews> getNewsList() {
+        return mRestApi.getNewsList();
     }
 }

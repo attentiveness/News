@@ -38,4 +38,12 @@ class NewsListUseCase extends UseCase {
         mRepository.refreshNewsList();
     }
 
+    @SuppressWarnings("unchecked")
+    public void getNewsList(Subscriber subscriber) {
+        mSubscription = mRepository.getNewsList()
+                .subscribeOn(Schedulers.from(mThreadExecutor))
+                .observeOn(mPostExecutionThread.getScheduler())
+                .subscribe(subscriber);
+    }
+
 }

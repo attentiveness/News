@@ -13,14 +13,14 @@ import com.squareup.picasso.Picasso;
 
 import org.attentiveness.news.R;
 import org.attentiveness.news.base.BaseAdapter;
+import org.attentiveness.news.data.DailyNews;
 import org.attentiveness.news.data.News;
-
-import java.util.List;
+import org.attentiveness.news.data.Story;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class NewsListAdapter extends BaseAdapter<News, NewsListAdapter.ViewHolder> {
+public class NewsListAdapter extends BaseAdapter<Story, NewsListAdapter.ViewHolder> {
 
     public interface OnItemClickListener {
         void onItemClicked(News news);
@@ -35,50 +35,61 @@ public class NewsListAdapter extends BaseAdapter<News, NewsListAdapter.ViewHolde
 
     @Override
     public ViewHolder onCreateItemViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindItemViewHolder(ViewHolder holder, int position) {
-        final News news = mItemList.get(position);
-        holder.mTvTitle.setText(news.getTitle());
-        holder.mTvPubDate.setText(news.getPubDate());
-        holder.mTvSource.setText(news.getSource());
-        String url = news.getImgUrls() != null && news.getImgUrls().length > 0 ? news.getImgUrls()[0].getUrl() : "";
-        if (!"".equals(url)) {
+//        final News news = mItemList.get(position);
+//        holder.mTvTitle.setText(news.getTitle());
+//        holder.mTvPubDate.setText(news.getPubDate());
+//        holder.mTvSource.setText(news.getSource());
+//        String url = news.getImgUrls() != null && news.getImgUrls().length > 0 ? news.getImgUrls()[0].getUrl() : "";
+//        if (!"".equals(url)) {
+//            Picasso.with(mContext).load(url).into(holder.mIvNews);
+//        } else {
+//            Picasso.with(mContext).load(R.mipmap.ic_launcher).into(holder.mIvNews);
+//        }
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (mOnItemClickListener != null) {
+//                    mOnItemClickListener.onItemClicked(news);
+//                }
+//            }
+//        });
+        Story story = mItemList.get(position);
+        holder.mTvTitle.setText(story.getTitle());
+        String url = story.getUrl();
+        if (url != null) {
             Picasso.with(mContext).load(url).into(holder.mIvNews);
-        } else {
-            Picasso.with(mContext).load(R.mipmap.ic_launcher).into(holder.mIvNews);
         }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mOnItemClickListener != null) {
-                    mOnItemClickListener.onItemClicked(news);
-                }
-            }
-        });
+    }
+
+    public void setItemList(DailyNews dailyNews) {
+        mItemList = dailyNews.getStories();
+        notifyDataSetChanged();
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.mOnItemClickListener = onItemClickListener;
     }
 
-    public void replaceItemList(List<News> list) {
-        mItemList.clear();
-        mItemList = list;
-        notifyDataSetChanged();
-    }
+//    public void replaceItemList(List<News> list) {
+//        mItemList.clear();
+//        mItemList = list;
+//        notifyDataSetChanged();
+//    }
 
     public void setHasMoreData(boolean hasMoreData) {
         mHasMoreData = hasMoreData;
     }
 
-    public void appendItemList(List<News> list) {
-        mItemList.addAll(list);
-        notifyDataSetChanged();
-    }
+//    public void appendItemList(List<News> list) {
+//        mItemList.addAll(list);
+//        notifyDataSetChanged();
+//    }
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -86,10 +97,10 @@ public class NewsListAdapter extends BaseAdapter<News, NewsListAdapter.ViewHolde
         ImageView mIvNews;
         @Bind(R.id.tv_title)
         TextView mTvTitle;
-        @Bind(R.id.tv_pub_date)
-        TextView mTvPubDate;
-        @Bind(R.id.tv_source)
-        TextView mTvSource;
+//        @Bind(R.id.tv_pub_date)
+//        TextView mTvPubDate;
+//        @Bind(R.id.tv_source)
+//        TextView mTvSource;
 
         public ViewHolder(View itemView) {
             super(itemView);

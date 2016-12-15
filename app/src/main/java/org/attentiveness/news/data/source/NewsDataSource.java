@@ -1,6 +1,7 @@
 package org.attentiveness.news.data.source;
 
 
+import org.attentiveness.news.data.DailyNews;
 import org.attentiveness.news.data.News;
 
 import java.util.List;
@@ -22,4 +23,7 @@ public interface NewsDataSource {
     void refreshNewsList();
 
     Observable<Integer> getTotalPage(String channelId);
+
+    Observable<DailyNews> getNewsList();
+
 }

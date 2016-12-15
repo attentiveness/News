@@ -3,6 +3,7 @@ package org.attentiveness.news.data.source;
 
 import android.content.Context;
 
+import org.attentiveness.news.data.DailyNews;
 import org.attentiveness.news.data.News;
 import org.attentiveness.news.data.source.local.NewsLocalDataSource;
 import org.attentiveness.news.data.source.remote.NewsRemoteDataSource;
@@ -85,6 +86,11 @@ public class NewsRepository implements NewsDataSource {
     @Override
     public Observable<Integer> getTotalPage(String channelId) {
         return mRemoteDataSource.getTotalPage(channelId);
+    }
+
+    @Override
+    public Observable<DailyNews> getNewsList() {
+        return mRemoteDataSource.getNewsList();
     }
 
     private Observable<List<News>> getRemoteDataSource(String channelId, int currentPage, int needContent, int needHtml) {

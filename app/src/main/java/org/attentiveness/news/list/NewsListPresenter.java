@@ -2,7 +2,7 @@ package org.attentiveness.news.list;
 
 
 import org.attentiveness.news.base.DefaultSubscriber;
-import org.attentiveness.news.data.News;
+import org.attentiveness.news.data.DailyNews;
 
 import java.util.List;
 
@@ -35,6 +35,12 @@ class NewsListPresenter implements NewsListContract.Presenter {
     }
 
     @Override
+    public void getNewsList() {
+        mView.showLoading();
+        mUseCase.getNewsList(new DailyNewsSubscriber());
+    }
+
+    @Override
     public void destroy() {
         mUseCase.unsubscribe();
     }
@@ -57,7 +63,7 @@ class NewsListPresenter implements NewsListContract.Presenter {
     }
 
 
-    private class FirstPageSubscriber extends DefaultSubscriber<List<News>> {
+    private class FirstPageSubscriber extends DefaultSubscriber<List<org.attentiveness.news.data.News>> {
         @Override
         public void onCompleted() {
             mView.hideLoading();
@@ -72,12 +78,12 @@ class NewsListPresenter implements NewsListContract.Presenter {
         }
 
         @Override
-        public void onNext(List<News> newsList) {
+        public void onNext(List<org.attentiveness.news.data.News> newsList) {
             mView.renderFirstPage(newsList);
         }
     }
 
-    private class AppendPageSubscriber extends DefaultSubscriber<List<News>> {
+    private class AppendPageSubscriber extends DefaultSubscriber<List<org.attentiveness.news.data.News>> {
         @Override
         public void onCompleted() {
             mView.hideLoading();
@@ -92,8 +98,28 @@ class NewsListPresenter implements NewsListContract.Presenter {
         }
 
         @Override
-        public void onNext(List<News> newsList) {
+        public void onNext(List<org.attentiveness.news.data.News> newsList) {
             mView.appendPage(newsList);
+        }
+    }
+
+    private class DailyNewsSubscriber extends DefaultSubscriber<DailyNews> {
+        @Override
+        public void onCompleted() {
+            mView.hideLoading();
+            mView.hideRetry();
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            mView.hideLoading();
+            mView.showRetry();
+            mView.showError(e.getMessage());
+        }
+
+        @Override
+        public void onNext(DailyNews dailyNews) {
+            mView.showNews(dailyNews);
         }
     }
 

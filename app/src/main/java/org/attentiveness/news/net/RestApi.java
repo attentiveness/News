@@ -6,6 +6,7 @@ import android.util.Log;
 import org.attentiveness.news.data.ApiResponseFunc;
 import org.attentiveness.news.data.Channel;
 import org.attentiveness.news.data.ChannelPage;
+import org.attentiveness.news.data.DailyNews;
 import org.attentiveness.news.data.News;
 import org.attentiveness.news.data.NewsPage;
 
@@ -21,7 +22,7 @@ import rx.functions.Func1;
 
 public class RestApi {
 
-    private final static String BASE_URL = "http://apis.baidu.com/showapi_open_bus/channel_news/";
+    private final static String BASE_URL = "http://news-at.zhihu.com/api/4/news/";
     private final static int DEFAULT_TIMEOUT = 5;
 
     private static RestApi INSTANCE = null;
@@ -77,6 +78,10 @@ public class RestApi {
                         return channelPage.getChannelList();
                     }
                 });
+    }
+
+    public Observable<DailyNews> getNewsList() {
+        return mNewsService.getNewsList();
     }
 
 }

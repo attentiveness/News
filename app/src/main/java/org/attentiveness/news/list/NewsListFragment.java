@@ -16,6 +16,7 @@ import android.widget.Button;
 
 import org.attentiveness.news.R;
 import org.attentiveness.news.base.BaseFragment;
+import org.attentiveness.news.data.DailyNews;
 import org.attentiveness.news.data.News;
 import org.attentiveness.news.detail.NewsDetailActivity;
 import org.attentiveness.news.detail.NewsDetailFragment;
@@ -102,8 +103,9 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
 
     private void init() {
         mPresenter = new NewsListPresenter(this);
-        mPresenter.getTotalPage(mChannelId);
-        mPresenter.getNewsList(true, mChannelId, mCurrentPage, mNeedContent, mNeedHtml);
+//        mPresenter.getTotalPage(mChannelId);
+//        mPresenter.getNewsList(true, mChannelId, mCurrentPage, mNeedContent, mNeedHtml);
+        mPresenter.getNewsList();
     }
 
     @Override
@@ -113,13 +115,13 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
 
     @Override
     public void renderFirstPage(List<News> newsList) {
-        mAdapter.replaceItemList(newsList);
+//        mAdapter.replaceItemList(newsList);
         mRvNewsList.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void appendPage(List<News> newsList) {
-        mAdapter.appendItemList(newsList);
+//        mAdapter.appendItemList(newsList);
         mRvNewsList.setVisibility(View.VISIBLE);
     }
 
@@ -127,6 +129,11 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
     public void showError(String message) {
         showMessage(mRvNewsList, message);
         mRvNewsList.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showNews(DailyNews news) {
+        mAdapter.setItemList(news);
     }
 
     @Override
