@@ -5,16 +5,11 @@
         android:id="@+id/content"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_news_list"
             android:checked="true"
-            android:icon="@drawable/ic_home"
+            android:icon="@drawable/ic_news_list"
             android:orderInCategory="0"
-            android:title="@string/nav_home"/>
-    </group>
-
-    <group
-        android:id="@+id/settings"
-        android:checkableBehavior="single">
+            android:title="@string/nav_news_list"/>
         <item
             android:id="@+id/nav_feedback"
             android:icon="@drawable/ic_feedback"
@@ -25,6 +20,16 @@
             android:icon="@drawable/ic_about"
             android:orderInCategory="1"
             android:title="@string/nav_about"/>
+    </group>
+
+    <group
+        android:id="@+id/settings"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:orderInCategory="1"
+            android:title="@string/nav_settings"/>
     </group>
 
 </menu>

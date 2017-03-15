@@ -14,6 +14,7 @@ import org.attentiveness.news.about.AboutUsActivity;
 import org.attentiveness.news.base.BaseActivity;
 import org.attentiveness.news.channel.NewsChannelActivity;
 import org.attentiveness.news.feedback.FeedbackActivity;
+import org.attentiveness.news.settings.SettingsActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -61,12 +62,14 @@ public class NewsListActivity extends BaseActivity implements NavigationView.OnN
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.nav_home) {
+        if (id == R.id.nav_news_list) {
             navigateToNewsChannel();
         } else if (id == R.id.nav_feedback) {
             navigateToFeedback();
         } else if (id == R.id.nav_about) {
-            navigateToAboutUs();
+            navigateToAbout();
+        } else if (id == R.id.nav_settings) {
+            navigateToSettings();
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
@@ -74,16 +77,25 @@ public class NewsListActivity extends BaseActivity implements NavigationView.OnN
 
     private void navigateToNewsChannel() {
         Intent intent = new Intent(this, NewsChannelActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
     private void navigateToFeedback() {
         Intent intent = new Intent(this, FeedbackActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
-    private void navigateToAboutUs() {
+    private void navigateToAbout() {
         Intent intent = new Intent(this, AboutUsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    private void navigateToSettings() {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 
