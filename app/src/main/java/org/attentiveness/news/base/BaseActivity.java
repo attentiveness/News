@@ -19,6 +19,10 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
+    protected void setup() {
+
+    }
+
     protected void addFragment(FragmentManager fragmentManager, int containerId, Fragment fragment) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(containerId, fragment);
