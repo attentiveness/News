@@ -3,6 +3,7 @@ package org.attentiveness.news.splash;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.design.widget.NavigationView;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -22,6 +23,11 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
 
         init();
+    }
+
+    @Override
+    protected void setupDrawerContent(NavigationView navigationView) {
+        //do nothing
     }
 
     private void init() {
