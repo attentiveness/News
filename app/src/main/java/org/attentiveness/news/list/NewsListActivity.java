@@ -15,6 +15,12 @@ public class NewsListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_list);
         setup();
+
+        NewsListFragment newsListFragment = (NewsListFragment) getSupportFragmentManager().findFragmentById(R.id.fl_container);
+        if (newsListFragment == null) {
+            newsListFragment = NewsListFragment.newInstance();
+            addFragment(getSupportFragmentManager(), R.id.fl_container, newsListFragment);
+        }
     }
 
     @Override
