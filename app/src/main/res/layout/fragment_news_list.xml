@@ -1,27 +1,14 @@
-<org.attentiveness.news.list.ScrollChildSwipeRefreshLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/srl_refresh_news"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="org.attentiveness.news.list.NewsListFragment">
 
-    <FrameLayout
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:text="@string/hello_blank_fragment"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_news_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <Button
-            android:id="@+id/btn_retry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/btn_retry"
-            android:visibility="gone"/>
-
-    </FrameLayout>
-</org.attentiveness.news.list.ScrollChildSwipeRefreshLayout>
+</FrameLayout>

@@ -23,22 +23,6 @@
             android:name=".list.NewsListActivity"
             android:label="@string/title_activity_news_list"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
-            android:name=".detail.NewsDetailActivity"
-            android:label="@string/title_activity_news_detail"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
-            android:name=".channel.NewsChannelActivity"
-            android:label="@string/title_activity_news_channel"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
-            android:name=".about.AboutUsActivity"
-            android:label="@string/title_activity_about_us"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
-            android:name=".feedback.FeedbackActivity"
-            android:label="@string/title_activity_feedback"
-            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
