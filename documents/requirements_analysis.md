@@ -1,3 +1,6 @@
+# Requirement Analysis
+This is a document for the News client app, which is used to analyze its requirements.
+
 ## Main Features
 News app has two main features: simpleness and individuation. Simpleness means that the app just has simple functions and 
 
