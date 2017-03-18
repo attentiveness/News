@@ -1,9 +1,9 @@
 # Requirement Analysis
 This is a document for the News client app, which is used to describe its requirements. It is very important to write such
 
-a document, because when you develop the app and test the app, you need something to tell you what to develop and what to 
+a document, because when you develop the app and test the app, you need something to tell you what to develop and 
 
-test.
+what to test.
 
 
 ## Introducation
@@ -31,9 +31,9 @@ News app has functions following below:
 
 1. It offers the latest news;
 
-2. A piece of news can 'burn down' after reading, which means the news read will disappear. However, the news read are not 
+2. A piece of news can 'burn down' after reading, which means the news read will disappear. However, the news read are 
 
-real to disappear, and they just are moved into another place.
+   not real to disappear, and they just are moved into another place.
 
 3. News can be shared through QQ, Weixin and Weibo platforms.
 
