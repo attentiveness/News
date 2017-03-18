@@ -1,7 +1,17 @@
 # Requirement Analysis
-This is a document for the News client app, which is used to analyze its requirements.
+This is a document for the News client app, which is used to describe its requirements. It is very important to write such
 
-## Main Features
+a document, because when you develop the app and test the app, you need something to tell you what to develop and what to 
+
+test.
+
+
+## Introducation
+News app is an app that offers news to you. It updates the news every day. You can share the news you like, send your 
+
+feedbacks via it, choose various skins and update the font size.
+
+### Main Features
 News app has two main features: simpleness and individuation. Simpleness means that the app just has simple functions and 
 
 use less pages to present it. Individuation means that our app will offer some individuation for everyone, such as skin 
@@ -10,7 +20,13 @@ custom, font size custom, even news content individuation which will emerge in t
 
 server blocks.
 
-## Various functions
+### Target To Read
+Anyone who wants to read news and learn more about the world can use it.
+
+
+## Functional Requirements
+
+### Various Functions
 News app has functions following below:
 
 1. It offers the latest news;
@@ -21,27 +37,21 @@ real to disappear, and they just are moved into another place.
 
 3. News can be shared through QQ, Weixin and Weibo platforms.
 
-4. It offers feedbacks that can help get some advice from users.
+4. It can get users' feedbacks that can help make the app better.
 
 5. It shows some information about me.
 
-6. It has some settings, such changing different skins and font size.
+6. It has some other settings, such as offering different skins and various font sizes.
 
-## Concrete pages
-It just has seven pages:
 
-1. A news list page that offers latest news, and also you can find news that have been read in burned news list, which will 
+## Performance Requirements
 
-replace the latest news list by switching the types of news list.
+### Time To Respond
+The app can respond to you as quickly as possible, supplying smooth experience to you.
 
-2. A news detail page that shows details of every news, in which users can share the news through third party platforms.
+### Memory
+The app will occupy lower memory, though it uses many pictures.
 
-3. A feedback page which gets suggestions from customers.
 
-4. An about page that shows my relative information.
-
-5. A settings page which shows font size and skin changes.
-
-6. A font size page that can change font size of the app, and it should offer page examples.
-
-7. A skin page that can change the app's background color, and it should supply page examples.
+## Environment
+The app will run only on android operate systems, and the api level of operate system must be greater than or equal 15.
