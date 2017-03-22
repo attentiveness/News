@@ -30,7 +30,7 @@ interface NewsListContract {
 
     interface Presenter extends BasePresenter {
 
-        void loadNews(boolean forceUpdate);
+        void loadNewsList(boolean forceUpdate);
 
         void openNewsDetails(@NonNull News requestedNews);
 
