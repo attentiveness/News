@@ -23,7 +23,7 @@ class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news, parent);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news, parent, false);
         return new ViewHolder(view);
     }
 
@@ -32,6 +32,7 @@ class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
         News news = this.mNewsList.get(position);
         ImageView imageView = holder.mImageView;
         TextView titleView = holder.mTitleView;
+        titleView.setText(news.getTitle());
     }
 
     @Override
@@ -39,7 +40,7 @@ class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
         return mNewsList.size();
     }
 
-    public void setItemList(List<News> list) {
+    void setItemList(List<News> list) {
         if (list == null) {
             throw new IllegalArgumentException("The arguments must not be null.");
         }
