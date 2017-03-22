@@ -30,8 +30,6 @@ interface NewsListContract {
 
     interface Presenter extends BasePresenter {
 
-        void result(int requestCode, int resultCode);
-
         void loadNews(boolean forceUpdate);
 
         void openNewsDetails(@NonNull News requestedNews);

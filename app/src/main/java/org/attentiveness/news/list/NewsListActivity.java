@@ -21,6 +21,8 @@ public class NewsListActivity extends BaseActivity {
             newsListFragment = NewsListFragment.newInstance();
             addFragment(getSupportFragmentManager(), R.id.fl_container, newsListFragment);
         }
+
+        NewsListPresenter presenter = new NewsListPresenter(newsListFragment);
     }
 
     @Override

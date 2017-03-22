@@ -6,17 +6,15 @@ import org.attentiveness.news.data.News;
 
 public class NewsListPresenter implements NewsListContract.Presenter {
 
-    public NewsListPresenter() {
+    private NewsListContract.View mNewsListView;
 
+    public NewsListPresenter(NewsListContract.View view) {
+        this.mNewsListView = view;
+        this.mNewsListView.setPresenter(this);
     }
 
     @Override
     public void start() {
-
-    }
-
-    @Override
-    public void result(int requestCode, int resultCode) {
 
     }
 

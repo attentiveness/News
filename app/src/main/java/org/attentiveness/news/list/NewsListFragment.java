@@ -2,6 +2,8 @@ package org.attentiveness.news.list;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +20,9 @@ import java.util.List;
  */
 public class NewsListFragment extends BaseFragment implements NewsListContract.View {
 
+    private NewsListContract.Presenter mPresenter;
     private RecyclerView mNewsListView;
+    private NewsListAdapter mNewsListAdapter;
 
     public static NewsListFragment newInstance() {
         return new NewsListFragment();
@@ -29,6 +33,12 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.mNewsListAdapter = new NewsListAdapter();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_news_list, container, false);
         mNewsListView = (RecyclerView) rootView.findViewById(R.id.rv_news_list);
@@ -36,8 +46,14 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
     }
 
     @Override
-    public void setPresenter(NewsListContract.Presenter presenter) {
+    public void setPresenter(@NonNull NewsListContract.Presenter presenter) {
+        this.mPresenter = presenter;
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.mPresenter.start();
     }
 
     @Override
