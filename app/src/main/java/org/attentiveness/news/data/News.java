@@ -1,28 +1,39 @@
 package org.attentiveness.news.data;
 
+import java.util.List;
+
 public class News {
 
-    private String url;
-    private String title;
+    private String date;
+    private List<Story> storyList;
+    private List<Story> topStoryList;
 
     public News() {
 
     }
 
-    public String getUrl() {
-        return url;
+    public String getDate() {
+        return date;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setDate(String date) {
+        this.date = date;
     }
 
-    public String getTitle() {
-        return title;
+    public List<Story> getStoryList() {
+        return storyList;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setStoryList(List<Story> storyList) {
+        this.storyList = storyList;
+    }
+
+    public List<Story> getTopStoryList() {
+        return topStoryList;
+    }
+
+    public void setTopStoryList(List<Story> topStoryList) {
+        this.topStoryList = topStoryList;
     }
 
 }

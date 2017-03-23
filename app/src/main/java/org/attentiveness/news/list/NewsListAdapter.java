@@ -32,7 +32,6 @@ class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
         News news = this.mNewsList.get(position);
         ImageView imageView = holder.mImageView;
         TextView titleView = holder.mTitleView;
-        titleView.setText(news.getTitle());
     }
 
     @Override
