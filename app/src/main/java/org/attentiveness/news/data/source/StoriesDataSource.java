@@ -24,7 +24,7 @@ public interface StoriesDataSource {
 
     void getStories(@NonNull LoadStoriesCallback callback);
 
-    void getStory(@NonNull int storyId, @NonNull GetStoryCallback callback);
+    void getStory(int storyId, @NonNull GetStoryCallback callback);
 
     void saveStory(@NonNull Story story);
 
@@ -32,5 +32,5 @@ public interface StoriesDataSource {
 
     void deleteAllStories();
 
-    void deleteStory(@NonNull int storyId);
+    void deleteStory(int storyId);
 }

@@ -30,7 +30,7 @@ public class LocalStoriesDataSource implements StoriesDataSource {
     }
 
     @Override
-    public void getStory(@NonNull int storyId, @NonNull GetStoryCallback callback) {
+    public void getStory(int storyId, @NonNull GetStoryCallback callback) {
 
     }
 
@@ -50,7 +50,7 @@ public class LocalStoriesDataSource implements StoriesDataSource {
     }
 
     @Override
-    public void deleteStory(@NonNull int storyId) {
+    public void deleteStory(int storyId) {
 
     }
 }
