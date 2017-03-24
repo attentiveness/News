@@ -2,7 +2,7 @@ package org.attentiveness.news.data.source.local;
 
 import android.provider.BaseColumns;
 
-public class StoriesPersistenceContract {
+final class StoriesPersistenceContract {
 
     // To prevent someone from accidentally instantiating the contract class,
     // give it an empty constructor.
@@ -10,10 +10,10 @@ public class StoriesPersistenceContract {
     }
 
     /* Inner class that defines the table contents */
-    public static abstract class StoryEntry implements BaseColumns {
-        public static final String TABLE_NAME = "story";
-        public static final String COLUMN_NAME_STORY_ID = "storyId";
-        public static final String COLUMN_NAME_TITLE = "title";
+    static abstract class StoryEntry implements BaseColumns {
+        static final String TABLE_NAME = "story";
+        static final String COLUMN_NAME_STORY_ID = "storyId";
+        static final String COLUMN_NAME_TITLE = "title";
     }
 
 }

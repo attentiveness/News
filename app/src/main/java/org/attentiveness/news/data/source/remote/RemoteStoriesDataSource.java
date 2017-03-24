@@ -4,6 +4,9 @@ import android.support.annotation.NonNull;
 
 import org.attentiveness.news.data.Story;
 import org.attentiveness.news.data.source.StoriesDataSource;
+import org.attentiveness.news.net.HttpManager;
+
+import java.util.List;
 
 public class RemoteStoriesDataSource implements StoriesDataSource {
 
@@ -22,31 +25,41 @@ public class RemoteStoriesDataSource implements StoriesDataSource {
 
     @Override
     public void getStories(@NonNull LoadStoriesCallback callback) {
-
+        List<Story> storyList = HttpManager.getInstance().getStoryList();
+        if (storyList == null || storyList.size() == 0) {
+            callback.onDataNotAvailable();
+        } else {
+            callback.onStoriesLoaded(storyList);
+        }
     }
 
     @Override
     public void getStory(int storyId, @NonNull GetStoryCallback callback) {
-
+        Story story = HttpManager.getInstance().getStory(storyId);
+        if (story == null) {
+            callback.onDataNotAvailable();
+        } else {
+            callback.onStoryLoaded(story);
+        }
     }
 
     @Override
     public void saveStory(@NonNull Story story) {
-
+        // do nothing
     }
 
     @Override
     public void refreshStories() {
-
+        // do nothing
     }
 
     @Override
     public void deleteAllStories() {
-
+        // do nothing
     }
 
     @Override
     public void deleteStory(int storyId) {
-
+        // do nothing
     }
 }

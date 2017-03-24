@@ -21,13 +21,13 @@ public class StoriesDataRepository implements StoriesDataSource {
     /**
      * This variable has package local visibility so it can be accessed from tests.
      */
-    Map<Integer, Story> mCachedStories;
+    private Map<Integer, Story> mCachedStories;
 
     /**
      * Marks the cache as invalid, to force an update the next time data is requested. This variable
      * has package local visibility so it can be accessed from tests.
      */
-    boolean mCacheIsDirty = false;
+    private boolean mCacheIsDirty = false;
 
     // Prevent direct instantiation.
     private StoriesDataRepository(@NonNull StoriesDataSource storiesRemoteDataSource,
@@ -90,14 +90,19 @@ public class StoriesDataRepository implements StoriesDataSource {
             public void onDataNotAvailable() {
                 mStoriesRemoteDataSource.getStory(storyId, new GetStoryCallback() {
 
+                    @SuppressLint("UseSparseArrays")
                     @Override
                     public void onStoryLoaded(Story story) {
-
+                        if (mCachedStories == null) {
+                            mCachedStories = new HashMap<>();
+                        }
+                        mCachedStories.put(story.getId(), story);
+                        callback.onStoryLoaded(story);
                     }
 
                     @Override
                     public void onDataNotAvailable() {
-
+                        callback.onDataNotAvailable();
                     }
                 });
             }
@@ -106,22 +111,37 @@ public class StoriesDataRepository implements StoriesDataSource {
 
     @Override
     public void saveStory(@NonNull Story story) {
-
+        this.mStoriesLocalDataSource.saveStory(story);
+        this.mStoriesRemoteDataSource.saveStory(story);
+        if (this.mCachedStories == null) {
+            this.mCachedStories = new HashMap<>();
+        }
+        this.mCachedStories.put(story.getId(), story);
     }
 
     @Override
     public void refreshStories() {
-
+        this.mCacheIsDirty = true;
     }
 
     @Override
     public void deleteAllStories() {
-
+        this.mStoriesLocalDataSource.deleteAllStories();
+        this.mStoriesRemoteDataSource.deleteAllStories();
+        if (this.mCachedStories == null) {
+            this.mCachedStories = new HashMap<>();
+        }
+        this.mCachedStories.clear();
     }
 
     @Override
     public void deleteStory(int storyId) {
-
+        this.mStoriesLocalDataSource.deleteStory(storyId);
+        this.mStoriesRemoteDataSource.deleteStory(storyId);
+        if (this.mCachedStories == null) {
+            this.mCachedStories = new HashMap<>();
+        }
+        this.mCachedStories.remove(storyId);
     }
 
     private void getRemoteDataSource(final LoadStoriesCallback callback) {
