@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import org.attentiveness.news.R;
 import org.attentiveness.news.base.BaseFragment;
 import org.attentiveness.news.data.News;
+import org.attentiveness.news.data.Story;
 
 import java.util.List;
 
@@ -94,8 +95,8 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
     }
 
     @Override
-    public void showNewsList(List<News> newsList) {
-        this.mNewsListAdapter.setItemList(newsList);
+    public void showStoryList(List<Story> storyList) {
+        this.mNewsListAdapter.setItemList(storyList);
     }
 
     @Override

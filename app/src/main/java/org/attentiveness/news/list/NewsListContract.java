@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import org.attentiveness.news.base.BasePresenter;
 import org.attentiveness.news.base.BaseView;
 import org.attentiveness.news.data.News;
+import org.attentiveness.news.data.Story;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ interface NewsListContract {
 
         void setLoadingIndicator(boolean active);
 
-        void showNewsList(List<News> newsList);
+        void showStoryList(List<Story> storyList);
 
         void showNewsDetailsUi(String url);
 

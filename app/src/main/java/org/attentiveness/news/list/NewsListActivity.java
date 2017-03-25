@@ -7,6 +7,9 @@ import android.view.MenuItem;
 
 import org.attentiveness.news.R;
 import org.attentiveness.news.base.BaseActivity;
+import org.attentiveness.news.data.source.StoriesDataRepository;
+import org.attentiveness.news.data.source.local.LocalStoriesDataSource;
+import org.attentiveness.news.data.source.remote.RemoteStoriesDataSource;
 
 public class NewsListActivity extends BaseActivity {
 
@@ -22,7 +25,9 @@ public class NewsListActivity extends BaseActivity {
             addFragment(getSupportFragmentManager(), R.id.fl_container, newsListFragment);
         }
 
-        NewsListPresenter presenter = new NewsListPresenter(newsListFragment);
+        StoriesDataRepository repository = StoriesDataRepository.getInstance(
+                RemoteStoriesDataSource.getInstance(), LocalStoriesDataSource.getInstance(this));
+        NewsListPresenter presenter = new NewsListPresenter(repository, newsListFragment);
     }
 
     @Override

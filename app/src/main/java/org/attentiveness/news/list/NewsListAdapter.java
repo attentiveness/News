@@ -8,17 +8,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.attentiveness.news.R;
-import org.attentiveness.news.data.News;
+import org.attentiveness.news.data.Story;
 
 import java.util.ArrayList;
 import java.util.List;
 
 class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
 
-    private List<News> mNewsList;
+    private List<Story> mStoryList;
 
     public NewsListAdapter() {
-        this.mNewsList = new ArrayList<>();
+        this.mStoryList = new ArrayList<>();
     }
 
     @Override
@@ -29,21 +29,22 @@ class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        News news = this.mNewsList.get(position);
+        Story story = this.mStoryList.get(position);
         ImageView imageView = holder.mImageView;
         TextView titleView = holder.mTitleView;
+        titleView.setText(story.getTitle());
     }
 
     @Override
     public int getItemCount() {
-        return mNewsList.size();
+        return mStoryList.size();
     }
 
-    void setItemList(List<News> list) {
+    void setItemList(List<Story> list) {
         if (list == null) {
             throw new IllegalArgumentException("The arguments must not be null.");
         }
-        this.mNewsList = list;
+        this.mStoryList = list;
         notifyDataSetChanged();
     }
 
