@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import org.attentiveness.news.R;
 import org.attentiveness.news.data.Story;
 
@@ -30,9 +32,15 @@ class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Story story = this.mStoryList.get(position);
+        List<String> imageUrlList = story.getImageList();
+        String imageUrl = null;
+        if (imageUrlList != null && imageUrlList.size() > 0) {
+            imageUrl = imageUrlList.get(0);
+        }
         ImageView imageView = holder.mImageView;
         TextView titleView = holder.mTitleView;
         titleView.setText(story.getTitle());
+        Picasso.with(holder.mImageView.getContext()).load(imageUrl).error(R.mipmap.ic_launcher).into(imageView);
     }
 
     @Override
