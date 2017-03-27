@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 
 import org.attentiveness.news.R;
 import org.attentiveness.news.base.BaseFragment;
-import org.attentiveness.news.data.News;
 import org.attentiveness.news.data.Story;
 
 import java.util.List;

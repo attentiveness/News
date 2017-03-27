@@ -1,11 +1,18 @@
 package org.attentiveness.news.data;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class News {
 
+    @SerializedName("date")
     private String date;
+
+    @SerializedName("stories")
     private List<Story> storyList;
+
+    @SerializedName("top_stories")
     private List<Story> topStoryList;
 
     public News() {

@@ -1,11 +1,15 @@
 package org.attentiveness.news.data;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class Story {
 
     private int id;
     private String title;
+
+    @SerializedName("images")
     private List<String> imageList;
 
     public Story() {

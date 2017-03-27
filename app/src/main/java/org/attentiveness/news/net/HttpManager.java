@@ -1,10 +1,10 @@
 package org.attentiveness.news.net;
 
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.squareup.okhttp.Call;
-import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -44,45 +44,57 @@ public class HttpManager {
     public void getStoryList(@NonNull final StoriesDataSource.LoadStoriesCallback callback) {
         String url = BASE_URL + "latest"; // get latest news
         Request request = new Request.Builder().url(url).build();
-        Call call = this.mClient.newCall(request);
-        call.enqueue(new Callback() {
+        final Call call = this.mClient.newCall(request);
+        new AsyncTask<Void, Void, List<Story>>() {
+
             @Override
-            public void onFailure(Request request, IOException e) {
-                callback.onDataNotAvailable();
+            protected List<Story> doInBackground(Void... params) {
+                try {
+                    Response response = call.execute();
+                    return parseStoryList(response);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return null;
+                }
             }
 
             @Override
-            public void onResponse(Response response) throws IOException {
-                List<Story> storyList = parseStoryList(response);
+            protected void onPostExecute(List<Story> storyList) {
                 if (storyList == null || storyList.size() == 0) {
                     callback.onDataNotAvailable();
                 } else {
                     callback.onStoriesLoaded(storyList);
                 }
             }
-        });
+        }.execute();
     }
 
     public void getStory(int storyId, @NonNull final StoriesDataSource.GetStoryCallback callback) {
         String url = BASE_URL + storyId;
         Request request = new Request.Builder().url(url).build();
-        Call call = this.mClient.newCall(request);
-        call.enqueue(new Callback() {
+        final Call call = this.mClient.newCall(request);
+        new AsyncTask<Void, Void, Story>() {
+
             @Override
-            public void onFailure(Request request, IOException e) {
-                callback.onDataNotAvailable();
+            protected Story doInBackground(Void... params) {
+                try {
+                    Response response = call.execute();
+                    return parseStory(response);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return null;
+                }
             }
 
             @Override
-            public void onResponse(Response response) throws IOException {
-                Story story = parseStory(response);
+            protected void onPostExecute(Story story) {
                 if (story == null) {
                     callback.onDataNotAvailable();
                 } else {
                     callback.onStoryLoaded(story);
                 }
             }
-        });
+        }.execute();
     }
 
     private List<Story> parseStoryList(Response response) {
