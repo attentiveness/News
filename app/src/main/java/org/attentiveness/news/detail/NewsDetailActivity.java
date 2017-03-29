@@ -11,6 +11,15 @@ public class NewsDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_detail);
+        setup();
+
+        NewsDetailFragment newsDetailFragment = (NewsDetailFragment) getSupportFragmentManager().findFragmentById(R.id.cl_container);
+        if (newsDetailFragment == null) {
+            newsDetailFragment = NewsDetailFragment.newInstance();
+            addFragment(getSupportFragmentManager(), R.id.cl_container, newsDetailFragment);
+        }
+
+        NewsDetailPresenter presenter = new NewsDetailPresenter(newsDetailFragment);
     }
 
 }

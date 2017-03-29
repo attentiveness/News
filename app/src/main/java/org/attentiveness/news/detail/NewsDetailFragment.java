@@ -2,6 +2,7 @@ package org.attentiveness.news.detail;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import org.attentiveness.news.base.BaseFragment;
  * News Detail Fragment
  */
 public class NewsDetailFragment extends BaseFragment implements NewsDetailContract.View {
+
+    private NewsDetailContract.Presenter mPresenter;
 
     public static NewsDetailFragment newInstance() {
         return new NewsDetailFragment();
@@ -29,8 +32,14 @@ public class NewsDetailFragment extends BaseFragment implements NewsDetailContra
     }
 
     @Override
-    public void setPresenter(NewsDetailContract.Presenter presenter) {
+    public void setPresenter(@NonNull NewsDetailContract.Presenter presenter) {
+        this.mPresenter = presenter;
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.mPresenter.start();
     }
 
     @Override
