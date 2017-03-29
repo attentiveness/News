@@ -46,7 +46,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    protected abstract void setupDrawerContent(NavigationView navigationView);
+    protected void setupDrawerContent(NavigationView navigationView) {
+
+    }
 
     protected void addFragment(FragmentManager fragmentManager, int containerId, Fragment fragment) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
