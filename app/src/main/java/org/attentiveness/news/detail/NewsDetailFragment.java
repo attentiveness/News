@@ -3,12 +3,14 @@ package org.attentiveness.news.detail;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import org.attentiveness.news.R;
 import org.attentiveness.news.base.BaseFragment;
+import org.attentiveness.news.list.NewsListFragment;
 
 /**
  * News Detail Fragment
@@ -16,13 +18,24 @@ import org.attentiveness.news.base.BaseFragment;
 public class NewsDetailFragment extends BaseFragment implements NewsDetailContract.View {
 
     private NewsDetailContract.Presenter mPresenter;
+    private int mStoryId;
 
-    public static NewsDetailFragment newInstance() {
-        return new NewsDetailFragment();
+    public static NewsDetailFragment newInstance(int id) {
+        NewsDetailFragment detailFragment = new NewsDetailFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(NewsListFragment.EXTRA_ID, id);
+        detailFragment.setArguments(bundle);
+        return detailFragment;
     }
 
     public NewsDetailFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        this.mStoryId = getArguments().getInt(NewsListFragment.EXTRA_ID);
     }
 
     @Override

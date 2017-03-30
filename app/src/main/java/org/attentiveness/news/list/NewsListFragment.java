@@ -1,10 +1,10 @@
 package org.attentiveness.news.list;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,13 +16,16 @@ import android.view.ViewGroup;
 import org.attentiveness.news.R;
 import org.attentiveness.news.base.BaseFragment;
 import org.attentiveness.news.data.Story;
+import org.attentiveness.news.detail.NewsDetailActivity;
 
 import java.util.List;
 
 /**
  * News list fragment.
  */
-public class NewsListFragment extends BaseFragment implements NewsListContract.View {
+public class NewsListFragment extends BaseFragment implements NewsListContract.View, NewsListAdapter.OnItemClickListener {
+
+    public static final String EXTRA_ID = "id";
 
     private NewsListContract.Presenter mPresenter;
     private NewsListAdapter mNewsListAdapter;
@@ -40,6 +43,7 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.mNewsListAdapter = new NewsListAdapter();
+        this.mNewsListAdapter.setOnItemClickListener(this);
     }
 
     @Override
@@ -122,5 +126,14 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
     @Override
     public boolean isActive() {
         return isAdded();
+    }
+
+    @Override
+    public void onStoryClicked(Story story) {
+        if (story != null && story.getId() > 0) {
+            Intent intent = new Intent(this.getActivity(), NewsDetailActivity.class);
+            intent.putExtra(EXTRA_ID, story.getId());
+            startActivity(intent);
+        }
     }
 }

@@ -17,7 +17,12 @@ import java.util.List;
 
 class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
 
+    interface OnItemClickListener {
+        void onStoryClicked(Story story);
+    }
+
     private List<Story> mStoryList;
+    private OnItemClickListener mOnItemClickListener;
 
     public NewsListAdapter() {
         this.mStoryList = new ArrayList<>();
@@ -31,7 +36,7 @@ class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Story story = this.mStoryList.get(position);
+        final Story story = this.mStoryList.get(position);
         List<String> imageUrlList = story.getImageList();
         String imageUrl = null;
         if (imageUrlList != null && imageUrlList.size() > 0) {
@@ -41,6 +46,14 @@ class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
         TextView titleView = holder.mTitleView;
         titleView.setText(story.getTitle());
         Picasso.with(holder.mImageView.getContext()).load(imageUrl).error(R.mipmap.ic_launcher).into(imageView);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnItemClickListener != null) {
+                    mOnItemClickListener.onStoryClicked(story);
+                }
+            }
+        });
     }
 
     @Override
@@ -54,6 +67,10 @@ class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
         }
         this.mStoryList = list;
         notifyDataSetChanged();
+    }
+
+    void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.mOnItemClickListener = onItemClickListener;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
