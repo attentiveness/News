@@ -8,6 +8,8 @@ import org.attentiveness.news.list.NewsListFragment;
 
 public class NewsDetailActivity extends BaseActivity {
 
+    private static final String INSTANCE_STORY_ID = "story_id";
+
     private int mStoryId;
 
     @Override
@@ -16,8 +18,11 @@ public class NewsDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_news_detail);
         setup();
 
-        this.mStoryId = getIntent().getIntExtra(NewsListFragment.EXTRA_ID, 0);
-
+        if (savedInstanceState == null) {
+            this.mStoryId = getIntent().getIntExtra(NewsListFragment.EXTRA_ID, 0);
+        } else {
+            this.mStoryId = savedInstanceState.getInt(INSTANCE_STORY_ID);
+        }
 
         NewsDetailFragment newsDetailFragment = (NewsDetailFragment) getSupportFragmentManager().findFragmentById(R.id.cl_container);
         if (newsDetailFragment == null) {
@@ -28,4 +33,9 @@ public class NewsDetailActivity extends BaseActivity {
         NewsDetailPresenter presenter = new NewsDetailPresenter(newsDetailFragment);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(INSTANCE_STORY_ID, this.mStoryId);
+    }
 }
