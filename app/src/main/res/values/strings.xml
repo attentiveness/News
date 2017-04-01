@@ -47,5 +47,6 @@
     </array>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tv_loading_error">Loading Error</string>
 
 </resources>

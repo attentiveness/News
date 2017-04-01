@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import org.attentiveness.news.R;
 import org.attentiveness.news.base.BaseFragment;
@@ -30,6 +31,7 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
     private NewsListContract.Presenter mPresenter;
     private NewsListAdapter mNewsListAdapter;
     private RecyclerView mNewsListView;
+    private TextView mLoadingErrorView;
 
     public static NewsListFragment newInstance() {
         return new NewsListFragment();
@@ -67,6 +69,8 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
             }
         });
 
+        this.mLoadingErrorView = (TextView) rootView.findViewById(R.id.tv_loading_error);
+
         setHasOptionsMenu(true);
         return rootView;
     }
@@ -100,6 +104,8 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
 
     @Override
     public void showStoryList(List<Story> storyList) {
+        this.mNewsListView.setVisibility(View.VISIBLE);
+        this.mLoadingErrorView.setVisibility(View.GONE);
         this.mNewsListAdapter.setItemList(storyList);
     }
 
@@ -115,7 +121,8 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
 
     @Override
     public void showLoadingNewsError() {
-
+        this.mNewsListView.setVisibility(View.GONE);
+        this.mLoadingErrorView.setVisibility(View.VISIBLE);
     }
 
     @Override
