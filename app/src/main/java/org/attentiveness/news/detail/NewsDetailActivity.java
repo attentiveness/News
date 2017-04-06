@@ -24,10 +24,10 @@ public class NewsDetailActivity extends BaseActivity {
             this.mStoryId = savedInstanceState.getInt(INSTANCE_STORY_ID);
         }
 
-        NewsDetailFragment newsDetailFragment = (NewsDetailFragment) getSupportFragmentManager().findFragmentById(R.id.cl_container);
+        NewsDetailFragment newsDetailFragment = (NewsDetailFragment) getSupportFragmentManager().findFragmentById(R.id.fl_container);
         if (newsDetailFragment == null) {
             newsDetailFragment = NewsDetailFragment.newInstance(this.mStoryId);
-            addFragment(getSupportFragmentManager(), R.id.cl_container, newsDetailFragment);
+            addFragment(getSupportFragmentManager(), R.id.fl_container, newsDetailFragment);
         }
 
         NewsDetailPresenter presenter = new NewsDetailPresenter(newsDetailFragment);

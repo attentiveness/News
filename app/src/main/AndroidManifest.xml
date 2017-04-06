@@ -23,7 +23,14 @@
             android:name=".list.NewsListActivity"
             android:label="@string/title_activity_news_list"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".detail.NewsDetailActivity">
+        <activity
+            android:name=".detail.NewsDetailActivity"
+            android:label="@string/title_activity_news_detail"
+            android:parentActivityName=".list.NewsListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".list.NewsListActivity"/>
         </activity>
     </application>
 
