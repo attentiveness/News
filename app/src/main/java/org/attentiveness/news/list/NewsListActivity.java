@@ -17,7 +17,7 @@ public class NewsListActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_list);
-        setup();
+        setup(R.drawable.ic_menu);
 
         NewsListFragment newsListFragment = (NewsListFragment) getSupportFragmentManager().findFragmentById(R.id.fl_container);
         if (newsListFragment == null) {

@@ -2,24 +2,8 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="nav_header_vertical_spacing">16dp</dimen>
     <dimen name="nav_header_height">160dp</dimen>
-    <!-- Default screen margins, per the Android Design guidelines. -->
+
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
 
-    <dimen name="button_inset_horizontal_material">@dimen/button_inset_material</dimen>
-    <dimen name="button_inset_material">4dp</dimen>
-    <dimen name="button_inset_vertical_material">6dp</dimen>
-
-    <dimen name="button_corner_material">2dp</dimen>
-
-    <dimen name="button_padding_horizontal_material">8dp</dimen>
-    <dimen name="button_padding_vertical_material">@dimen/button_padding_material</dimen>
-    <dimen name="button_padding_material">4dp</dimen>
-
-    <dimen name="button_min_width">88dp</dimen>
-    <dimen name="button_min_height">48dp</dimen>
-
-    <dimen name="tv_min_width">75dp</dimen>
-    <dimen name="tv_min_height">35dp</dimen>
 </resources>

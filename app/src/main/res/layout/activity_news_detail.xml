@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cl_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="org.attentiveness.news.detail.NewsDetailActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <include layout="@layout/app_bar"/>
+
+    <include layout="@layout/content_news_detail"/>
+
+</android.support.design.widget.CoordinatorLayout>
