@@ -1,12 +1,14 @@
 package org.attentiveness.news.detail;
 
-import android.support.annotation.NonNull;
+import org.attentiveness.news.data.source.StoriesDataRepository;
 
-public class NewsDetailPresenter implements NewsDetailContract.Presenter {
+class NewsDetailPresenter implements NewsDetailContract.Presenter {
 
+    private StoriesDataRepository mRepository;
     private NewsDetailContract.View mView;
 
-    public NewsDetailPresenter(NewsDetailContract.View view) {
+    NewsDetailPresenter(StoriesDataRepository repository, NewsDetailContract.View view) {
+        this.mRepository = repository;
         this.mView = view;
         this.mView.setPresenter(this);
     }
@@ -17,7 +19,7 @@ public class NewsDetailPresenter implements NewsDetailContract.Presenter {
     }
 
     @Override
-    public void openNewsDetail(@NonNull String url) {
+    public void openNewsDetail(int storyId) {
 
     }
 }

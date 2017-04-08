@@ -4,7 +4,12 @@ import android.os.Bundle;
 
 import org.attentiveness.news.R;
 import org.attentiveness.news.base.BaseActivity;
+import org.attentiveness.news.data.source.StoriesDataRepository;
+import org.attentiveness.news.data.source.local.LocalStoriesDataSource;
+import org.attentiveness.news.data.source.remote.RemoteStoriesDataSource;
 import org.attentiveness.news.list.NewsListFragment;
+
+import butterknife.ButterKnife;
 
 public class NewsDetailActivity extends BaseActivity {
 
@@ -16,6 +21,7 @@ public class NewsDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_detail);
+        ButterKnife.bind(this);
         setup();
 
         if (savedInstanceState == null) {
@@ -29,8 +35,9 @@ public class NewsDetailActivity extends BaseActivity {
             newsDetailFragment = NewsDetailFragment.newInstance(this.mStoryId);
             addFragment(getSupportFragmentManager(), R.id.fl_container, newsDetailFragment);
         }
-
-        NewsDetailPresenter presenter = new NewsDetailPresenter(newsDetailFragment);
+        StoriesDataRepository repository = StoriesDataRepository.getInstance(
+                RemoteStoriesDataSource.getInstance(), LocalStoriesDataSource.getInstance(this));
+        NewsDetailPresenter presenter = new NewsDetailPresenter(repository, newsDetailFragment);
     }
 
     @Override

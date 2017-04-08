@@ -1,15 +1,11 @@
 package org.attentiveness.news.detail;
 
-import android.support.annotation.NonNull;
-
 import org.attentiveness.news.base.BasePresenter;
 import org.attentiveness.news.base.BaseView;
 
-public interface NewsDetailContract {
+interface NewsDetailContract {
 
     interface View extends BaseView<Presenter> {
-
-        void setLoadingIndicator(boolean active);
 
         void showNewsDetailUi();
 
@@ -23,7 +19,7 @@ public interface NewsDetailContract {
 
     interface Presenter extends BasePresenter {
 
-        void openNewsDetail(@NonNull String url);
+        void openNewsDetail(int storyId);
 
     }
 }

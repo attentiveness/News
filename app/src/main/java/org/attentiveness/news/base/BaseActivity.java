@@ -2,6 +2,7 @@ package org.attentiveness.news.base;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -15,12 +16,22 @@ import android.view.View;
 
 import org.attentiveness.news.R;
 
+import butterknife.BindView;
+
 /**
  * Base Activity
  */
 public abstract class BaseActivity extends AppCompatActivity {
 
+    @Nullable
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
+    @Nullable
+    @BindView(R.id.drawer_layout)
     protected DrawerLayout mDrawerLayout;
+    @Nullable
+    @BindView(R.id.nav_view)
+    NavigationView mNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +43,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void setup(int barIconId) {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(this.mToolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             if (barIconId > 0) {
@@ -42,13 +52,11 @@ public abstract class BaseActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (mDrawerLayout != null) {
-            mDrawerLayout.setStatusBarBackground(R.color.colorPrimaryDark);
+        if (this.mDrawerLayout != null) {
+            this.mDrawerLayout.setStatusBarBackground(R.color.colorPrimaryDark);
         }
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        if (navigationView != null) {
-            setupDrawerContent(navigationView);
+        if (this.mNavigationView != null) {
+            setupDrawerContent(this.mNavigationView);
         }
     }
 

@@ -15,6 +15,9 @@ import org.attentiveness.news.data.Story;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
 
     interface OnItemClickListener {
@@ -24,7 +27,7 @@ class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
     private List<Story> mStoryList;
     private OnItemClickListener mOnItemClickListener;
 
-    public NewsListAdapter() {
+    NewsListAdapter() {
         this.mStoryList = new ArrayList<>();
     }
 
@@ -58,7 +61,7 @@ class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return mStoryList.size();
+        return this.mStoryList.size();
     }
 
     void setItemList(List<Story> list) {
@@ -75,13 +78,14 @@ class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView mImageView;
-        private TextView mTitleView;
+        @BindView(R.id.iv_img)
+        ImageView mImageView;
+        @BindView(R.id.tv_title)
+        TextView mTitleView;
 
         ViewHolder(View itemView) {
             super(itemView);
-            mImageView = (ImageView) itemView.findViewById(R.id.iv_img);
-            mTitleView = (TextView) itemView.findViewById(R.id.tv_title);
+            ButterKnife.bind(this, itemView);
         }
     }
 

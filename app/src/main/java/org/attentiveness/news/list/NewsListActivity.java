@@ -1,6 +1,7 @@
 package org.attentiveness.news.list;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.view.MenuItem;
@@ -11,12 +12,15 @@ import org.attentiveness.news.data.source.StoriesDataRepository;
 import org.attentiveness.news.data.source.local.LocalStoriesDataSource;
 import org.attentiveness.news.data.source.remote.RemoteStoriesDataSource;
 
+import butterknife.ButterKnife;
+
 public class NewsListActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_list);
+        ButterKnife.bind(this);
         setup(R.drawable.ic_menu);
 
         NewsListFragment newsListFragment = (NewsListFragment) getSupportFragmentManager().findFragmentById(R.id.fl_container);
@@ -35,7 +39,7 @@ public class NewsListActivity extends BaseActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 // Open the navigation drawer when the home icon is selected from the toolbar.
-                mDrawerLayout.openDrawer(GravityCompat.START);
+                this.mDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -45,7 +49,7 @@ public class NewsListActivity extends BaseActivity {
     protected void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
                 switch (itemId) {
                     case R.id.nav_news_list:

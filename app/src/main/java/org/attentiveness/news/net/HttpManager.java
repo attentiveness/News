@@ -4,10 +4,6 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
-import com.squareup.okhttp.Call;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 
 import org.attentiveness.news.data.News;
 import org.attentiveness.news.data.Story;
@@ -15,7 +11,11 @@ import org.attentiveness.news.data.source.StoriesDataSource;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * Http Manager that responds to url request.
@@ -35,10 +35,11 @@ public class HttpManager {
         return INSTANCE;
     }
 
+    /**
+     * Both connection time and read time are 10,000ms by default.
+     */
     private HttpManager() {
-        this.mClient = new OkHttpClient();
-        this.mClient.setConnectTimeout(5000, TimeUnit.MILLISECONDS);
-        this.mClient.setReadTimeout(10000, TimeUnit.MILLISECONDS);
+        this.mClient = new OkHttpClient.Builder().build();
     }
 
     public void getStoryList(@NonNull final StoriesDataSource.LoadStoriesCallback callback) {

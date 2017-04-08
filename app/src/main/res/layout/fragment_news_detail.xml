@@ -5,4 +5,9 @@
     android:layout_height="match_parent"
     tools:context="org.attentiveness.news.detail.NewsDetailFragment">
 
+    <WebView
+        android:id="@+id/wv_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </FrameLayout>

@@ -21,6 +21,9 @@ import org.attentiveness.news.detail.NewsDetailActivity;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * News list fragment.
  */
@@ -28,10 +31,15 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
 
     public static final String EXTRA_ID = "id";
 
+    @BindView(R.id.rv_news_list)
+    RecyclerView mNewsListView;
+    @BindView(R.id.rl_swipe_fresh_view)
+    ScrollChildSwipeRefreshLayout mSwipeRefreshLayout;
+    @BindView(R.id.tv_loading_error)
+    TextView mLoadingErrorView;
+
     private NewsListContract.Presenter mPresenter;
     private NewsListAdapter mNewsListAdapter;
-    private RecyclerView mNewsListView;
-    private TextView mLoadingErrorView;
 
     public static NewsListFragment newInstance() {
         return new NewsListFragment();
@@ -51,25 +59,23 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_news_list, container, false);
-        this.mNewsListView = (RecyclerView) rootView.findViewById(R.id.rv_news_list);
+        ButterKnife.bind(this, rootView);
+
         this.mNewsListView.setAdapter(mNewsListAdapter);
         this.mNewsListView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        final ScrollChildSwipeRefreshLayout swipeRefreshLayout = (ScrollChildSwipeRefreshLayout) rootView.findViewById(R.id.rl_swipe_fresh_view);
-        swipeRefreshLayout.setColorSchemeColors(
+        this.mSwipeRefreshLayout.setColorSchemeColors(
                 ContextCompat.getColor(getActivity(), R.color.colorPrimary),
                 ContextCompat.getColor(getActivity(), R.color.colorAccent),
                 ContextCompat.getColor(getActivity(), R.color.colorPrimaryDark)
         );
-        swipeRefreshLayout.setChildView(mNewsListView);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        this.mSwipeRefreshLayout.setChildView(this.mNewsListView);
+        this.mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 mPresenter.loadNewsList(false);
             }
         });
-
-        this.mLoadingErrorView = (TextView) rootView.findViewById(R.id.tv_loading_error);
 
         setHasOptionsMenu(true);
         return rootView;
@@ -91,13 +97,12 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
         if (getView() == null) {
             return;
         }
-        final SwipeRefreshLayout srl = (SwipeRefreshLayout) getView().findViewById(R.id.rl_swipe_fresh_view);
 
         // Make sure setRefreshing() is called after the layout is done with everything else.
-        srl.post(new Runnable() {
+        this.mSwipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
-                srl.setRefreshing(active);
+                mSwipeRefreshLayout.setRefreshing(active);
             }
         });
     }
