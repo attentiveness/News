@@ -3,7 +3,7 @@
     android:id="@+id/rl_swipe_fresh_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="org.attentiveness.news.list.NewsListFragment">
+    tools:context="org.attentiveness.news.list.StoryListFragment">
 
     <FrameLayout
         android:layout_width="match_parent"

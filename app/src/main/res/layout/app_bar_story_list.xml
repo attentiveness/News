@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="org.attentiveness.news.list.NewsListActivity">
+    tools:context="org.attentiveness.news.list.StoryListActivity">
 
     <include layout="@layout/app_bar"/>
 
-    <include layout="@layout/content_news_list"/>
+    <include layout="@layout/content_story_list"/>
 
 </android.support.design.widget.CoordinatorLayout>

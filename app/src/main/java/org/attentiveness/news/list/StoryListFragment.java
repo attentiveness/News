@@ -17,7 +17,7 @@ import android.widget.TextView;
 import org.attentiveness.news.R;
 import org.attentiveness.news.base.BaseFragment;
 import org.attentiveness.news.data.Story;
-import org.attentiveness.news.detail.NewsDetailActivity;
+import org.attentiveness.news.detail.StoryDetailActivity;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ import butterknife.ButterKnife;
 /**
  * News list fragment.
  */
-public class NewsListFragment extends BaseFragment implements NewsListContract.View, NewsListAdapter.OnItemClickListener {
+public class StoryListFragment extends BaseFragment implements StoryListContract.View, StoryListAdapter.OnItemClickListener {
 
     public static final String EXTRA_ID = "id";
 
@@ -38,27 +38,27 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
     @BindView(R.id.tv_loading_error)
     TextView mLoadingErrorView;
 
-    private NewsListContract.Presenter mPresenter;
-    private NewsListAdapter mNewsListAdapter;
+    private StoryListContract.Presenter mPresenter;
+    private StoryListAdapter mNewsListAdapter;
 
-    public static NewsListFragment newInstance() {
-        return new NewsListFragment();
+    public static StoryListFragment newInstance() {
+        return new StoryListFragment();
     }
 
-    public NewsListFragment() {
+    public StoryListFragment() {
         // Required empty public constructor
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.mNewsListAdapter = new NewsListAdapter();
+        this.mNewsListAdapter = new StoryListAdapter();
         this.mNewsListAdapter.setOnItemClickListener(this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_news_list, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_story_list, container, false);
         ButterKnife.bind(this, rootView);
 
         this.mNewsListView.setAdapter(mNewsListAdapter);
@@ -82,14 +82,36 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
     }
 
     @Override
-    public void setPresenter(@NonNull NewsListContract.Presenter presenter) {
+    public void setPresenter(@NonNull StoryListContract.Presenter presenter) {
         this.mPresenter = presenter;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        this.mPresenter.start();
+        this.mPresenter.subscribe();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        this.mPresenter.unsubscribe();
+    }
+
+
+    @Override
+    public void showRetry() {
+        this.mLoadingErrorView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideRetry() {
+        this.mLoadingErrorView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showError(String message) {
+        showMessage(this.mSwipeRefreshLayout, message);
     }
 
     @Override
@@ -115,23 +137,7 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
     }
 
     @Override
-    public void showNewsDetailsUi(String url) {
-
-    }
-
-    @Override
     public void showNewsMarkedRead() {
-
-    }
-
-    @Override
-    public void showLoadingNewsError() {
-        this.mNewsListView.setVisibility(View.GONE);
-        this.mLoadingErrorView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void showNoNews() {
 
     }
 
@@ -143,7 +149,7 @@ public class NewsListFragment extends BaseFragment implements NewsListContract.V
     @Override
     public void onStoryClicked(Story story) {
         if (story != null && story.getId() > 0) {
-            Intent intent = new Intent(this.getActivity(), NewsDetailActivity.class);
+            Intent intent = new Intent(this.getActivity(), StoryDetailActivity.class);
             intent.putExtra(EXTRA_ID, story.getId());
             startActivity(intent);
         }

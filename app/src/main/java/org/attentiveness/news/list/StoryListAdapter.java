@@ -18,7 +18,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
+class StoryListAdapter extends RecyclerView.Adapter<StoryListAdapter.ViewHolder> {
 
     interface OnItemClickListener {
         void onStoryClicked(Story story);
@@ -27,13 +27,13 @@ class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHolder> {
     private List<Story> mStoryList;
     private OnItemClickListener mOnItemClickListener;
 
-    NewsListAdapter() {
+    StoryListAdapter() {
         this.mStoryList = new ArrayList<>();
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_story, parent, false);
         return new ViewHolder(view);
     }
 

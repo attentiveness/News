@@ -1,21 +1,19 @@
 package org.attentiveness.news.net;
 
-import android.os.AsyncTask;
-import android.support.annotation.NonNull;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
-import com.google.gson.Gson;
-
-import org.attentiveness.news.data.News;
 import org.attentiveness.news.data.Story;
-import org.attentiveness.news.data.source.StoriesDataSource;
+import org.attentiveness.news.data.StoryDetail;
 
-import java.io.IOException;
 import java.util.List;
 
-import okhttp3.Call;
+import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Http Manager that responds to url request.
@@ -26,11 +24,12 @@ public class HttpManager {
 
     private static HttpManager INSTANCE = null;
 
-    private OkHttpClient mClient;
+    private Context mContext;
+    private StoryService mStoryService;
 
-    public static HttpManager getInstance() {
+    public static HttpManager getInstance(Context context) {
         if (INSTANCE == null) {
-            INSTANCE = new HttpManager();
+            INSTANCE = new HttpManager(context);
         }
         return INSTANCE;
     }
@@ -38,104 +37,36 @@ public class HttpManager {
     /**
      * Both connection time and read time are 10,000ms by default.
      */
-    private HttpManager() {
-        this.mClient = new OkHttpClient.Builder().build();
+    private HttpManager(Context context) {
+        this.mContext = context;
+        OkHttpClient client = new OkHttpClient.Builder().build();
+        Retrofit retrofit = new Retrofit.Builder()
+                .client(client)
+                .baseUrl(BASE_URL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        this.mStoryService = retrofit.create(StoryService.class);
     }
 
-    public void getStoryList(@NonNull final StoriesDataSource.LoadStoriesCallback callback) {
-        String url = BASE_URL + "latest"; // get latest news
-        Request request = new Request.Builder().url(url).build();
-        final Call call = this.mClient.newCall(request);
-        new AsyncTask<Void, Void, List<Story>>() {
-
-            @Override
-            protected List<Story> doInBackground(Void... params) {
-                try {
-                    Response response = call.execute();
-                    return parseStoryList(response);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return null;
-                }
-            }
-
-            @Override
-            protected void onPostExecute(List<Story> storyList) {
-                if (storyList == null || storyList.size() == 0) {
-                    callback.onDataNotAvailable();
-                } else {
-                    callback.onStoriesLoaded(storyList);
-                }
-            }
-        }.execute();
+    public Observable<List<Story>> getStoryList(String date) {
+        if (this.isConnected()) {
+            return Observable.empty();
+        }
+        return this.mStoryService.getStoryList(date);
     }
 
-    public void getStory(int storyId, @NonNull final StoriesDataSource.GetStoryCallback callback) {
-        String url = BASE_URL + storyId;
-        Request request = new Request.Builder().url(url).build();
-        final Call call = this.mClient.newCall(request);
-        new AsyncTask<Void, Void, Story>() {
-
-            @Override
-            protected Story doInBackground(Void... params) {
-                try {
-                    Response response = call.execute();
-                    return parseStory(response);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return null;
-                }
-            }
-
-            @Override
-            protected void onPostExecute(Story story) {
-                if (story == null) {
-                    callback.onDataNotAvailable();
-                } else {
-                    callback.onStoryLoaded(story);
-                }
-            }
-        }.execute();
+    public Observable<StoryDetail> getStory(int storyId) {
+        if (this.isConnected()) {
+            return Observable.empty();
+        }
+        return this.mStoryService.getStoryDetail(storyId);
     }
 
-    private List<Story> parseStoryList(Response response) {
-        if (response == null) {
-            return null;
-        }
-        int code = response.code();
-        if (code != 200) {
-            return null;
-        }
-        try {
-            String resultJson = response.body().string();
-            News news = new Gson().fromJson(resultJson, News.class);
-            if (news != null) {
-                return news.getStoryList();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private Story parseStory(Response response) {
-        if (response == null) {
-            return null;
-        }
-        int code = response.code();
-        if (code != 200) {
-            return null;
-        }
-        try {
-            String resultJson = response.body().string();
-            Story story = new Gson().fromJson(resultJson, Story.class);
-            if (story != null) {
-                return story;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+    private boolean isConnected() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnectedOrConnecting();
     }
 
 }

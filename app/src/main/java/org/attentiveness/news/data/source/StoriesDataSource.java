@@ -3,34 +3,22 @@ package org.attentiveness.news.data.source;
 import android.support.annotation.NonNull;
 
 import org.attentiveness.news.data.Story;
+import org.attentiveness.news.data.StoryDetail;
 
 import java.util.List;
 
+import io.reactivex.Observable;
+
 public interface StoriesDataSource {
 
-    interface LoadStoriesCallback {
+    Observable<List<Story>> getStories(String date);
 
-        void onStoriesLoaded(List<Story> stories);
+    Observable<StoryDetail> getStory(int storyId);
 
-        void onDataNotAvailable();
-    }
-
-    interface GetStoryCallback {
-
-        void onStoryLoaded(Story story);
-
-        void onDataNotAvailable();
-    }
-
-    void getStories(@NonNull LoadStoriesCallback callback);
-
-    void getStory(int storyId, @NonNull GetStoryCallback callback);
-
-    void saveStory(@NonNull Story story);
+    void saveStories(@NonNull List<Story> storyList);
 
     void refreshStories();
 
     void deleteAllStories();
 
-    void deleteStory(int storyId);
 }

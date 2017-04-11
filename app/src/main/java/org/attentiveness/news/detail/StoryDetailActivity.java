@@ -7,11 +7,12 @@ import org.attentiveness.news.base.BaseActivity;
 import org.attentiveness.news.data.source.StoriesDataRepository;
 import org.attentiveness.news.data.source.local.LocalStoriesDataSource;
 import org.attentiveness.news.data.source.remote.RemoteStoriesDataSource;
-import org.attentiveness.news.list.NewsListFragment;
+import org.attentiveness.news.list.StoryListFragment;
+import org.attentiveness.news.util.SchedulerProvider;
 
 import butterknife.ButterKnife;
 
-public class NewsDetailActivity extends BaseActivity {
+public class StoryDetailActivity extends BaseActivity {
 
     private static final String INSTANCE_STORY_ID = "story_id";
 
@@ -20,24 +21,24 @@ public class NewsDetailActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news_detail);
+        setContentView(R.layout.activity_story_detail);
         ButterKnife.bind(this);
         setup();
 
         if (savedInstanceState == null) {
-            this.mStoryId = getIntent().getIntExtra(NewsListFragment.EXTRA_ID, 0);
+            this.mStoryId = getIntent().getIntExtra(StoryListFragment.EXTRA_ID, 0);
         } else {
             this.mStoryId = savedInstanceState.getInt(INSTANCE_STORY_ID);
         }
 
-        NewsDetailFragment newsDetailFragment = (NewsDetailFragment) getSupportFragmentManager().findFragmentById(R.id.fl_container);
-        if (newsDetailFragment == null) {
-            newsDetailFragment = NewsDetailFragment.newInstance(this.mStoryId);
-            addFragment(getSupportFragmentManager(), R.id.fl_container, newsDetailFragment);
+        StoryDetailFragment storyDetailFragment = (StoryDetailFragment) getSupportFragmentManager().findFragmentById(R.id.fl_container);
+        if (storyDetailFragment == null) {
+            storyDetailFragment = StoryDetailFragment.newInstance();
+            addFragment(getSupportFragmentManager(), R.id.fl_container, storyDetailFragment);
         }
         StoriesDataRepository repository = StoriesDataRepository.getInstance(
-                RemoteStoriesDataSource.getInstance(), LocalStoriesDataSource.getInstance(this));
-        NewsDetailPresenter presenter = new NewsDetailPresenter(repository, newsDetailFragment);
+                RemoteStoriesDataSource.getInstance(this), LocalStoriesDataSource.getInstance(this, SchedulerProvider.getInstance()));
+        StoryDetailPresenter presenter = new StoryDetailPresenter(this.mStoryId, repository, storyDetailFragment);
     }
 
     @Override

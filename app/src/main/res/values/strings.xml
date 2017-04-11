@@ -2,13 +2,13 @@
     <string name="app_name">News</string>
 
     <string name="title_activity_splash">Splash</string>
-    <string name="title_activity_news_list">News</string>
-    <string name="title_activity_news_detail">NewsDetail</string>
+    <string name="title_activity_story_list">News</string>
+    <string name="title_activity_story_detail">Detail</string>
     <string name="title_activity_feedback">Feedback</string>
     <string name="title_activity_about_us">About</string>
     <string name="title_activity_settings">SettingsActivity</string>
 
-    <string name="nav_news_list">News</string>
+    <string name="nav_story_list">News</string>
     <string name="nav_feedback">Feedback</string>
     <string name="nav_about">About</string>
     <string name="nav_settings">Settings</string>

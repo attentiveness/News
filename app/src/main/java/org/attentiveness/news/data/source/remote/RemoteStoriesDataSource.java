@@ -1,39 +1,48 @@
 package org.attentiveness.news.data.source.remote;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import org.attentiveness.news.data.Story;
+import org.attentiveness.news.data.StoryDetail;
 import org.attentiveness.news.data.source.StoriesDataSource;
 import org.attentiveness.news.net.HttpManager;
+
+import java.util.List;
+
+import io.reactivex.Observable;
 
 public class RemoteStoriesDataSource implements StoriesDataSource {
 
     private static RemoteStoriesDataSource INSTANCE;
 
-    public static RemoteStoriesDataSource getInstance() {
+    private Context mContext;
+
+    public static RemoteStoriesDataSource getInstance(Context context) {
         if (INSTANCE == null) {
-            INSTANCE = new RemoteStoriesDataSource();
+            INSTANCE = new RemoteStoriesDataSource(context);
         }
         return INSTANCE;
     }
 
     // Prevent direct instantiation.
-    private RemoteStoriesDataSource() {
+    private RemoteStoriesDataSource(Context context) {
+        this.mContext = context;
     }
 
     @Override
-    public void getStories(@NonNull LoadStoriesCallback callback) {
-        HttpManager.getInstance().getStoryList(callback);
+    public Observable<List<Story>> getStories(String date) {
+        return HttpManager.getInstance(this.mContext).getStoryList(date);
     }
 
     @Override
-    public void getStory(int storyId, @NonNull GetStoryCallback callback) {
-        HttpManager.getInstance().getStory(storyId, callback);
+    public Observable<StoryDetail> getStory(int storyId) {
+        return HttpManager.getInstance(this.mContext).getStory(storyId);
     }
 
     @Override
-    public void saveStory(@NonNull Story story) {
-        // do nothing
+    public void saveStories(@NonNull List<Story> storyList) {
+        //do nothing
     }
 
     @Override
@@ -46,8 +55,4 @@ public class RemoteStoriesDataSource implements StoriesDataSource {
         // do nothing
     }
 
-    @Override
-    public void deleteStory(int storyId) {
-        // do nothing
-    }
 }

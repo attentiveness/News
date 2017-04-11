@@ -11,27 +11,28 @@ import org.attentiveness.news.base.BaseActivity;
 import org.attentiveness.news.data.source.StoriesDataRepository;
 import org.attentiveness.news.data.source.local.LocalStoriesDataSource;
 import org.attentiveness.news.data.source.remote.RemoteStoriesDataSource;
+import org.attentiveness.news.util.SchedulerProvider;
 
 import butterknife.ButterKnife;
 
-public class NewsListActivity extends BaseActivity {
+public class StoryListActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_news_list);
+        setContentView(R.layout.activity_story_list);
         ButterKnife.bind(this);
         setup(R.drawable.ic_menu);
 
-        NewsListFragment newsListFragment = (NewsListFragment) getSupportFragmentManager().findFragmentById(R.id.fl_container);
+        StoryListFragment newsListFragment = (StoryListFragment) getSupportFragmentManager().findFragmentById(R.id.fl_container);
         if (newsListFragment == null) {
-            newsListFragment = NewsListFragment.newInstance();
+            newsListFragment = StoryListFragment.newInstance();
             addFragment(getSupportFragmentManager(), R.id.fl_container, newsListFragment);
         }
 
         StoriesDataRepository repository = StoriesDataRepository.getInstance(
-                RemoteStoriesDataSource.getInstance(), LocalStoriesDataSource.getInstance(this));
-        NewsListPresenter presenter = new NewsListPresenter(repository, newsListFragment);
+                RemoteStoriesDataSource.getInstance(this), LocalStoriesDataSource.getInstance(this, SchedulerProvider.getInstance()));
+        StoryListPresenter presenter = new StoryListPresenter(repository, newsListFragment);
     }
 
     @Override

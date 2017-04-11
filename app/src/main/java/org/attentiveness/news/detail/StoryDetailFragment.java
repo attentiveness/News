@@ -10,10 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import org.attentiveness.news.R;
 import org.attentiveness.news.base.BaseFragment;
-import org.attentiveness.news.list.NewsListFragment;
+import org.attentiveness.news.data.StoryDetail;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,36 +23,34 @@ import butterknife.ButterKnife;
 /**
  * News Detail Fragment
  */
-public class NewsDetailFragment extends BaseFragment implements NewsDetailContract.View {
+public class StoryDetailFragment extends BaseFragment implements StoryDetailContract.View {
 
+    @BindView(R.id.fl_root_view)
+    FrameLayout mRootView;
     @BindView(R.id.wv_view)
     WebView mWebView;
+    @BindView(R.id.tv_loading_error)
+    TextView mRetryView;
 
-    private NewsDetailContract.Presenter mPresenter;
-    private int mStoryId;
+    private StoryDetailContract.Presenter mPresenter;
 
-    public static NewsDetailFragment newInstance(int id) {
-        NewsDetailFragment detailFragment = new NewsDetailFragment();
-        Bundle bundle = new Bundle();
-        bundle.putInt(NewsListFragment.EXTRA_ID, id);
-        detailFragment.setArguments(bundle);
-        return detailFragment;
+    public static StoryDetailFragment newInstance() {
+        return new StoryDetailFragment();
     }
 
-    public NewsDetailFragment() {
+    public StoryDetailFragment() {
         // Required empty public constructor
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.mStoryId = getArguments().getInt(NewsListFragment.EXTRA_ID);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_news_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_story_detail, container, false);
         ButterKnife.bind(this, view);
 
         WebSettings webSettings = this.mWebView.getSettings();
@@ -60,34 +60,49 @@ public class NewsDetailFragment extends BaseFragment implements NewsDetailContra
     }
 
     @Override
-    public void setPresenter(@NonNull NewsDetailContract.Presenter presenter) {
+    public void setPresenter(@NonNull StoryDetailContract.Presenter presenter) {
         this.mPresenter = presenter;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        this.mPresenter.start();
-        this.mPresenter.openNewsDetail(this.mStoryId);
+        this.mPresenter.subscribe();
     }
 
     @Override
-    public void showNewsDetailUi() {
+    public void onPause() {
+        super.onPause();
+        this.mPresenter.unsubscribe();
+    }
+
+    @Override
+    public void setLoadingIndicator(boolean active) {
 
     }
 
     @Override
-    public void showLoadingNewsDetailError() {
-
+    public void showRetry() {
+        this.mRetryView.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void showNoNewsDetail() {
+    public void hideRetry() {
+        this.mRetryView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showError(String message) {
+        this.showMessage(this.mRootView, message);
+    }
+
+    @Override
+    public void showStoryDetail(StoryDetail comment) {
 
     }
 
     @Override
     public boolean isActive() {
-        return false;
+        return isAdded();
     }
 }

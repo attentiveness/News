@@ -2,24 +2,19 @@ package org.attentiveness.news.detail;
 
 import org.attentiveness.news.base.BasePresenter;
 import org.attentiveness.news.base.BaseView;
+import org.attentiveness.news.data.StoryDetail;
 
-interface NewsDetailContract {
+interface StoryDetailContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showNewsDetailUi();
-
-        void showLoadingNewsDetailError();
-
-        void showNoNewsDetail();
+        void showStoryDetail(StoryDetail comment);
 
         boolean isActive();
 
     }
 
     interface Presenter extends BasePresenter {
-
-        void openNewsDetail(int storyId);
 
     }
 }

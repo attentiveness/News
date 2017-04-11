@@ -9,7 +9,7 @@ import android.view.WindowManager;
 
 import org.attentiveness.news.R;
 import org.attentiveness.news.base.BaseActivity;
-import org.attentiveness.news.list.NewsListActivity;
+import org.attentiveness.news.list.StoryListActivity;
 
 import butterknife.ButterKnife;
 
@@ -50,7 +50,7 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void navigate() {
-        Intent intent = new Intent(this, NewsListActivity.class);
+        Intent intent = new Intent(this, StoryListActivity.class);
         startActivity(intent);
     }
 
