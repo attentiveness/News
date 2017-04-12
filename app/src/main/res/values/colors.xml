@@ -3,4 +3,7 @@
     <color name="colorPrimary">#4CAF50</color>
     <color name="colorPrimaryDark">#326917</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="cv_initial_background">#FFFFFF</color>
+    <color name="fl_initial_background">#E0E0E0</color>
 </resources>
