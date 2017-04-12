@@ -16,8 +16,6 @@ interface StoryListContract {
 
         void hideStoryList();
 
-        void showNewsMarkedRead();
-
         void setLoadingIndicator(boolean active);
 
         void showRetry();

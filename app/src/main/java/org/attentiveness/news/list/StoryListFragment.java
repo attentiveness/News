@@ -152,11 +152,6 @@ public class StoryListFragment extends BaseFragment implements StoryListContract
     }
 
     @Override
-    public void showNewsMarkedRead() {
-
-    }
-
-    @Override
     public boolean isActive() {
         return isAdded();
     }
