@@ -23,11 +23,11 @@ class StoryListPresenter implements StoryListContract.Presenter {
     private StoriesDataRepository mRepository;
     @NonNull
     private StoryListContract.View mNewsListView;
-    private boolean mFirstLoad = true;
     @NonNull
     private final BaseSchedulerProvider mSchedulerProvider;
     @NonNull
     private CompositeDisposable mDisposables;
+    private boolean mFirstLoad = true;
 
     StoryListPresenter(@NonNull StoriesDataRepository repository, @NonNull StoryListContract.View view) {
         this.mRepository = repository;
@@ -80,6 +80,7 @@ class StoryListPresenter implements StoryListContract.Presenter {
                             public void accept(@io.reactivex.annotations.NonNull Throwable throwable) throws Exception {
                                 mNewsListView.showError(throwable.getMessage());
                                 mNewsListView.showRetry();
+                                mNewsListView.hideStoryList();
                                 mNewsListView.setLoadingIndicator(false);
                             }
                         },

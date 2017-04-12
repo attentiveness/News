@@ -49,7 +49,7 @@ public class StoryListFragment extends BaseFragment implements StoryListContract
         Bundle bundle = new Bundle();
         bundle.putString(EXTRA_DATE, date);
         storyListFragment.setArguments(bundle);
-        return new StoryListFragment();
+        return storyListFragment;
     }
 
     public StoryListFragment() {
@@ -61,11 +61,6 @@ public class StoryListFragment extends BaseFragment implements StoryListContract
         super.onCreate(savedInstanceState);
         this.mNewsListAdapter = new StoryListAdapter();
         this.mNewsListAdapter.setOnItemClickListener(this);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
         Bundle bundle = getArguments();
         if (bundle != null && bundle.containsKey(EXTRA_DATE)) {
             this.mDate = bundle.getString(EXTRA_DATE);
@@ -148,8 +143,12 @@ public class StoryListFragment extends BaseFragment implements StoryListContract
     @Override
     public void showStoryList(List<Story> storyList) {
         this.mNewsListView.setVisibility(View.VISIBLE);
-        this.mLoadingErrorView.setVisibility(View.GONE);
         this.mNewsListAdapter.setItemList(storyList);
+    }
+
+    @Override
+    public void hideStoryList() {
+        this.mNewsListView.setVisibility(View.GONE);
     }
 
     @Override

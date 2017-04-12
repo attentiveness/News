@@ -14,6 +14,8 @@ interface StoryListContract {
 
         void showStoryList(List<Story> storyList);
 
+        void hideStoryList();
+
         void showNewsMarkedRead();
 
         void setLoadingIndicator(boolean active);
