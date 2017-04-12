@@ -1,4 +1,5 @@
-<org.attentiveness.news.list.ScrollChildSwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<org.attentiveness.news.list.ScrollChildSwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rl_swipe_fresh_view"
     android:layout_width="match_parent"
@@ -12,16 +13,16 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_news_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/tv_loading_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/ic_error"
-            android:gravity="center"
+            android:layout_gravity="center"
+            android:drawableTop="@drawable/ic_network_error"
             android:text="@string/tv_loading_error"
-            android:visibility="gone" />
+            android:visibility="gone"/>
 
     </FrameLayout>
 </org.attentiveness.news.list.ScrollChildSwipeRefreshLayout>

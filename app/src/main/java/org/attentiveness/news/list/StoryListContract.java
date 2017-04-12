@@ -1,5 +1,7 @@
 package org.attentiveness.news.list;
 
+import android.support.annotation.NonNull;
+
 import org.attentiveness.news.base.BasePresenter;
 import org.attentiveness.news.base.BaseView;
 import org.attentiveness.news.data.Story;
@@ -14,11 +16,21 @@ interface StoryListContract {
 
         void showNewsMarkedRead();
 
+        void setLoadingIndicator(boolean active);
+
+        void showRetry();
+
+        void hideRetry();
+
+        void showError(String message);
+
+        boolean isActive();
+
     }
 
     interface Presenter extends BasePresenter {
 
-        void loadNewsList(boolean forceUpdate);
+        void loadNewsList(@NonNull String date, boolean forceUpdate);
 
     }
 

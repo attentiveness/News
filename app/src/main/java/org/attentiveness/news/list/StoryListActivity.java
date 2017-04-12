@@ -11,7 +11,10 @@ import org.attentiveness.news.base.BaseActivity;
 import org.attentiveness.news.data.source.StoriesDataRepository;
 import org.attentiveness.news.data.source.local.LocalStoriesDataSource;
 import org.attentiveness.news.data.source.remote.RemoteStoriesDataSource;
-import org.attentiveness.news.util.SchedulerProvider;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 import butterknife.ButterKnife;
 
@@ -26,12 +29,16 @@ public class StoryListActivity extends BaseActivity {
 
         StoryListFragment newsListFragment = (StoryListFragment) getSupportFragmentManager().findFragmentById(R.id.fl_container);
         if (newsListFragment == null) {
-            newsListFragment = StoryListFragment.newInstance();
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.DAY_OF_YEAR, 1);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd", Locale.US);
+            String date = simpleDateFormat.format(calendar.getTime());
+            newsListFragment = StoryListFragment.newInstance(date);
             addFragment(getSupportFragmentManager(), R.id.fl_container, newsListFragment);
         }
 
         StoriesDataRepository repository = StoriesDataRepository.getInstance(
-                RemoteStoriesDataSource.getInstance(this), LocalStoriesDataSource.getInstance(this, SchedulerProvider.getInstance()));
+                RemoteStoriesDataSource.getInstance(this), LocalStoriesDataSource.getInstance(this));
         StoryListPresenter presenter = new StoryListPresenter(repository, newsListFragment);
     }
 
@@ -40,7 +47,9 @@ public class StoryListActivity extends BaseActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 // Open the navigation drawer when the home icon is selected from the toolbar.
-                this.mDrawerLayout.openDrawer(GravityCompat.START);
+                if (this.mDrawerLayout != null) {
+                    this.mDrawerLayout.openDrawer(GravityCompat.START);
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -67,7 +76,9 @@ public class StoryListActivity extends BaseActivity {
                 }
                 // Close the navigation drawer when an item is selected.
                 item.setChecked(true);
-                mDrawerLayout.closeDrawers();
+                if (mDrawerLayout != null) {
+                    mDrawerLayout.closeDrawers();
+                }
                 return true;
             }
         });

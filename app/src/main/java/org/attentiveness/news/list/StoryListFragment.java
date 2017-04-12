@@ -18,6 +18,7 @@ import org.attentiveness.news.R;
 import org.attentiveness.news.base.BaseFragment;
 import org.attentiveness.news.data.Story;
 import org.attentiveness.news.detail.StoryDetailActivity;
+import org.attentiveness.news.util.LogUtil;
 
 import java.util.List;
 
@@ -30,6 +31,7 @@ import butterknife.ButterKnife;
 public class StoryListFragment extends BaseFragment implements StoryListContract.View, StoryListAdapter.OnItemClickListener {
 
     public static final String EXTRA_ID = "id";
+    public static final String EXTRA_DATE = "date";
 
     @BindView(R.id.rv_news_list)
     RecyclerView mNewsListView;
@@ -40,8 +42,13 @@ public class StoryListFragment extends BaseFragment implements StoryListContract
 
     private StoryListContract.Presenter mPresenter;
     private StoryListAdapter mNewsListAdapter;
+    private String mDate;
 
-    public static StoryListFragment newInstance() {
+    public static StoryListFragment newInstance(String date) {
+        StoryListFragment storyListFragment = new StoryListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(EXTRA_DATE, date);
+        storyListFragment.setArguments(bundle);
         return new StoryListFragment();
     }
 
@@ -57,11 +64,20 @@ public class StoryListFragment extends BaseFragment implements StoryListContract
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Bundle bundle = getArguments();
+        if (bundle != null && bundle.containsKey(EXTRA_DATE)) {
+            this.mDate = bundle.getString(EXTRA_DATE);
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_story_list, container, false);
         ButterKnife.bind(this, rootView);
 
-        this.mNewsListView.setAdapter(mNewsListAdapter);
+        this.mNewsListView.setAdapter(this.mNewsListAdapter);
         this.mNewsListView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         this.mSwipeRefreshLayout.setColorSchemeColors(
@@ -73,7 +89,7 @@ public class StoryListFragment extends BaseFragment implements StoryListContract
         this.mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.loadNewsList(false);
+                mPresenter.loadNewsList(mDate, false);
             }
         });
 
@@ -98,7 +114,6 @@ public class StoryListFragment extends BaseFragment implements StoryListContract
         this.mPresenter.unsubscribe();
     }
 
-
     @Override
     public void showRetry() {
         this.mLoadingErrorView.setVisibility(View.VISIBLE);
@@ -112,11 +127,12 @@ public class StoryListFragment extends BaseFragment implements StoryListContract
     @Override
     public void showError(String message) {
         showMessage(this.mSwipeRefreshLayout, message);
+        LogUtil.e(StoryListFragment.class.getSimpleName(), message);
     }
 
     @Override
     public void setLoadingIndicator(final boolean active) {
-        if (getView() == null) {
+        if (!this.isActive() || getView() == null) {
             return;
         }
 

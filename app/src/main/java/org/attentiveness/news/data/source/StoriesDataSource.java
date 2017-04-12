@@ -13,7 +13,7 @@ public interface StoriesDataSource {
 
     Observable<List<Story>> getStories(String date);
 
-    Observable<StoryDetail> getStory(int storyId);
+    Observable<StoryDetail> getStoryDetail(int storyId);
 
     void saveStories(@NonNull List<Story> storyList);
 

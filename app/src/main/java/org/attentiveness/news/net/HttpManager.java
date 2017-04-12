@@ -4,12 +4,15 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import org.attentiveness.news.data.News;
 import org.attentiveness.news.data.Story;
 import org.attentiveness.news.data.StoryDetail;
 
 import java.util.List;
 
 import io.reactivex.Observable;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -50,14 +53,19 @@ public class HttpManager {
     }
 
     public Observable<List<Story>> getStoryList(String date) {
-        if (this.isConnected()) {
+        if (!this.isConnected()) {
             return Observable.empty();
         }
-        return this.mStoryService.getStoryList(date);
+        return this.mStoryService.getStoryList(date).map(new Function<News, List<Story>>() {
+            @Override
+            public List<Story> apply(@NonNull News news) throws Exception {
+                return news.getStoryList();
+            }
+        });
     }
 
     public Observable<StoryDetail> getStory(int storyId) {
-        if (this.isConnected()) {
+        if (!this.isConnected()) {
             return Observable.empty();
         }
         return this.mStoryService.getStoryDetail(storyId);

@@ -8,7 +8,9 @@ interface StoryDetailContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showStoryDetail(StoryDetail comment);
+        void showStoryDetail(StoryDetail storyDetail);
+
+        void showError(String message);
 
         boolean isActive();
 

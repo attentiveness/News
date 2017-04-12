@@ -1,4 +1,4 @@
-package org.attentiveness.news.util;
+package org.attentiveness.news.util.schedulers;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

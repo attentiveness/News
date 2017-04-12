@@ -12,7 +12,15 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+
+//        jackOptions {
+//            enabled true
+//        }
     }
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_1_8
+//        targetCompatibility JavaVersion.VERSION_1_8
+//    }
     buildTypes {
         release {
             minifyEnabled false
@@ -65,7 +73,6 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.2.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
     compile 'com.squareup.retrofit2:retrofit-mock:2.2.0'
-//    compile 'com.squareup.sqlbrite:sqlbrite:1.1.1'
     compile 'com.android.support.test.espresso:espresso-idling-resource:2.2.2'
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'

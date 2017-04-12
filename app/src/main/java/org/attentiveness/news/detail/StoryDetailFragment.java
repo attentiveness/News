@@ -11,11 +11,12 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import org.attentiveness.news.R;
 import org.attentiveness.news.base.BaseFragment;
 import org.attentiveness.news.data.StoryDetail;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,8 +30,6 @@ public class StoryDetailFragment extends BaseFragment implements StoryDetailCont
     FrameLayout mRootView;
     @BindView(R.id.wv_view)
     WebView mWebView;
-    @BindView(R.id.tv_loading_error)
-    TextView mRetryView;
 
     private StoryDetailContract.Presenter mPresenter;
 
@@ -77,28 +76,38 @@ public class StoryDetailFragment extends BaseFragment implements StoryDetailCont
     }
 
     @Override
-    public void setLoadingIndicator(boolean active) {
-
-    }
-
-    @Override
-    public void showRetry() {
-        this.mRetryView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideRetry() {
-        this.mRetryView.setVisibility(View.GONE);
-    }
-
-    @Override
     public void showError(String message) {
         this.showMessage(this.mRootView, message);
     }
 
     @Override
-    public void showStoryDetail(StoryDetail comment) {
-
+    public void showStoryDetail(StoryDetail storyDetail) {
+        if (!this.isActive() || getView() == null) {
+            return;
+        }
+        if (storyDetail == null) {
+            return;
+        }
+        String body = storyDetail.getContent();
+        List<String> jsArray = storyDetail.getJsList();
+        if (jsArray != null && jsArray.size() > 0) {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int index = 0; index < jsArray.size(); index++) {
+                String jsLink = "<script type=\"text/javascript\" src=\"" + jsArray.get(index) + "\"></script>";
+                stringBuilder.append(jsLink);
+            }
+            body = stringBuilder.toString() + body;
+        }
+        List<String> cssArray = storyDetail.getCssList();
+        if (cssArray != null && cssArray.size() > 0) {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int index = 0; index < cssArray.size(); index++) {
+                String cssLink = "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + cssArray.get(index) + "\" />";
+                stringBuilder.append(cssLink);
+            }
+            body = stringBuilder.toString() + body;
+        }
+        this.mWebView.loadData(body, "text/html; charset=UTF-8", null);
     }
 
     @Override

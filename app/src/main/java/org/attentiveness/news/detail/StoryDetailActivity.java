@@ -8,7 +8,6 @@ import org.attentiveness.news.data.source.StoriesDataRepository;
 import org.attentiveness.news.data.source.local.LocalStoriesDataSource;
 import org.attentiveness.news.data.source.remote.RemoteStoriesDataSource;
 import org.attentiveness.news.list.StoryListFragment;
-import org.attentiveness.news.util.SchedulerProvider;
 
 import butterknife.ButterKnife;
 
@@ -37,7 +36,7 @@ public class StoryDetailActivity extends BaseActivity {
             addFragment(getSupportFragmentManager(), R.id.fl_container, storyDetailFragment);
         }
         StoriesDataRepository repository = StoriesDataRepository.getInstance(
-                RemoteStoriesDataSource.getInstance(this), LocalStoriesDataSource.getInstance(this, SchedulerProvider.getInstance()));
+                RemoteStoriesDataSource.getInstance(this), LocalStoriesDataSource.getInstance(this));
         StoryDetailPresenter presenter = new StoryDetailPresenter(this.mStoryId, repository, storyDetailFragment);
     }
 
