@@ -4,11 +4,14 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import org.attentiveness.news.R;
 import org.attentiveness.news.data.News;
 import org.attentiveness.news.data.Story;
 import org.attentiveness.news.data.StoryDetail;
+import org.attentiveness.news.exception.NetworkException;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import io.reactivex.Observable;
 import io.reactivex.annotations.NonNull;
@@ -54,7 +57,12 @@ public class HttpManager {
 
     public Observable<List<Story>> getStoryList(String date) {
         if (!this.isConnected()) {
-            return Observable.empty();
+            return Observable.error(new Callable<Throwable>() {
+                @Override
+                public Throwable call() {
+                    return new NetworkException(mContext.getResources().getString(R.string.error_no_network_connection));
+                }
+            });
         }
         return this.mStoryService.getStoryList(date).map(new Function<News, List<Story>>() {
             @Override
@@ -66,7 +74,12 @@ public class HttpManager {
 
     public Observable<StoryDetail> getStory(int storyId) {
         if (!this.isConnected()) {
-            return Observable.empty();
+            return Observable.error(new Callable<Throwable>() {
+                @Override
+                public Throwable call() {
+                    return new NetworkException(mContext.getResources().getString(R.string.error_no_network_connection));
+                }
+            });
         }
         return this.mStoryService.getStoryDetail(storyId);
     }

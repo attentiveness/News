@@ -18,12 +18,12 @@ import org.attentiveness.news.R;
 import org.attentiveness.news.base.BaseFragment;
 import org.attentiveness.news.data.Story;
 import org.attentiveness.news.detail.StoryDetailActivity;
-import org.attentiveness.news.util.LogUtil;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * News list fragment.
@@ -122,7 +122,6 @@ public class StoryListFragment extends BaseFragment implements StoryListContract
     @Override
     public void showError(String message) {
         showMessage(this.mSwipeRefreshLayout, message);
-        LogUtil.e(StoryListFragment.class.getSimpleName(), message);
     }
 
     @Override
@@ -163,5 +162,10 @@ public class StoryListFragment extends BaseFragment implements StoryListContract
             intent.putExtra(EXTRA_ID, story.getId());
             startActivity(intent);
         }
+    }
+
+    @OnClick(R.id.tv_loading_error)
+    void reload() {
+        mPresenter.loadNewsList(mDate, true);
     }
 }
