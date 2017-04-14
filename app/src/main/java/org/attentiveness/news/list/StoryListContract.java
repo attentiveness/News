@@ -14,6 +14,8 @@ interface StoryListContract {
 
         void showStoryList(List<Story> storyList);
 
+        void appendStoryList(List<Story> storyList);
+
         void hideStoryList();
 
         void setLoadingIndicator(boolean active);
@@ -30,7 +32,7 @@ interface StoryListContract {
 
     interface Presenter extends BasePresenter {
 
-        void loadNewsList(@NonNull String date, boolean forceUpdate);
+        void loadNewsList(@NonNull String date, boolean forceUpdate, boolean append);
 
     }
 

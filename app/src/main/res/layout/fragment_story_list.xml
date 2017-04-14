@@ -12,7 +12,7 @@
         android:background="@color/fl_initial_background">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_news_list"
+            android:id="@+id/rv_story_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

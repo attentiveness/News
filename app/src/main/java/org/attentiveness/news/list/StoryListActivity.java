@@ -11,10 +11,7 @@ import org.attentiveness.news.base.BaseActivity;
 import org.attentiveness.news.data.source.StoriesDataRepository;
 import org.attentiveness.news.data.source.local.LocalStoriesDataSource;
 import org.attentiveness.news.data.source.remote.RemoteStoriesDataSource;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
+import org.attentiveness.news.util.DateUtil;
 
 import butterknife.ButterKnife;
 
@@ -29,11 +26,8 @@ public class StoryListActivity extends BaseActivity {
 
         StoryListFragment newsListFragment = (StoryListFragment) getSupportFragmentManager().findFragmentById(R.id.fl_container);
         if (newsListFragment == null) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.DAY_OF_YEAR, 1);
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd", Locale.US);
-            String date = simpleDateFormat.format(calendar.getTime());
-            newsListFragment = StoryListFragment.newInstance(date);
+            String today = DateUtil.getToday();
+            newsListFragment = StoryListFragment.newInstance(today);
             addFragment(getSupportFragmentManager(), R.id.fl_container, newsListFragment);
         }
 

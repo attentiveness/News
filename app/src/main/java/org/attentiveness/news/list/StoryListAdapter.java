@@ -72,6 +72,14 @@ class StoryListAdapter extends RecyclerView.Adapter<StoryListAdapter.ViewHolder>
         notifyDataSetChanged();
     }
 
+    void addItemList(List<Story> list) {
+        if (list == null || list.size() == 0) {
+            return;
+        }
+        this.mStoryList.addAll(list);
+        notifyDataSetChanged();
+    }
+
     void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.mOnItemClickListener = onItemClickListener;
     }

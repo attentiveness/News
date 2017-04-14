@@ -4,13 +4,11 @@ import android.support.annotation.NonNull;
 
 import org.attentiveness.news.data.Story;
 import org.attentiveness.news.data.source.StoriesDataRepository;
+import org.attentiveness.news.util.DateUtil;
 import org.attentiveness.news.util.schedulers.BaseSchedulerProvider;
 import org.attentiveness.news.util.schedulers.SchedulerProvider;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -39,11 +37,8 @@ class StoryListPresenter implements StoryListContract.Presenter {
 
     @Override
     public void subscribe() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd", Locale.US);
-        String date = simpleDateFormat.format(calendar.getTime());
-        loadNewsList(date, false);
+        String today = DateUtil.getToday();
+        this.loadNewsList(today, false, false);
     }
 
     @Override
@@ -52,12 +47,12 @@ class StoryListPresenter implements StoryListContract.Presenter {
     }
 
     @Override
-    public void loadNewsList(@NonNull String date, boolean forceUpdate) {
-        this.loadNewsList(date, forceUpdate || this.mFirstLoad, true);
+    public void loadNewsList(@NonNull String date, boolean forceUpdate, boolean append) {
+        this.loadNewsList(date, forceUpdate || this.mFirstLoad, true, append);
         this.mFirstLoad = false;
     }
 
-    private void loadNewsList(@NonNull String date, boolean forceUpdate, final boolean showLoadingUI) {
+    private void loadNewsList(@NonNull String date, boolean forceUpdate, final boolean showLoadingUI, final boolean append) {
         if (showLoadingUI) {
             this.mNewsListView.setLoadingIndicator(true);
         }
@@ -71,7 +66,11 @@ class StoryListPresenter implements StoryListContract.Presenter {
                         new Consumer<List<Story>>() {
                             @Override
                             public void accept(@io.reactivex.annotations.NonNull List<Story> storyList) throws Exception {
-                                mNewsListView.showStoryList(storyList);
+                                if (append) {
+                                    mNewsListView.appendStoryList(storyList);
+                                } else {
+                                    mNewsListView.showStoryList(storyList);
+                                }
                                 mNewsListView.hideRetry();
                             }
                         },
