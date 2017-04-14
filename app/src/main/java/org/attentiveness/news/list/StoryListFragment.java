@@ -103,6 +103,8 @@ public class StoryListFragment extends BaseFragment implements StoryListContract
         this.mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                mLoadingCount = 0;
+                mDate = mOriginalDate;
                 mPresenter.loadNewsList(mDate, false, false);
             }
         });
